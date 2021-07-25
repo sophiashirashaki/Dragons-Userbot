@@ -18,14 +18,14 @@ from .utils import (
 LOGS = logging.getLogger("DragonsUserbot")
 
 print(dragons.__copyright__)
-print("Licensed under the terms of the " + userbot.__license__)
+print("Licensed di bawah ketentuan " + dragons.__license__)
 
 cmdhr = Config.COMMAND_HAND_LER
 
 try:
-    LOGS.info("Starting Userbot")
+    LOGS.info("Memulai Userbot")
     catub.loop.run_until_complete(setup_bot())
-    LOGS.info("TG Bot Startup Completed")
+    LOGS.info("TG Bot Startup Berhasil")
 except Exception as e:
     LOGS.error(f"{str(e)}")
     sys.exit()
