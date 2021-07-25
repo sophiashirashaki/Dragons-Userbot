@@ -8,4 +8,4 @@
 #
 # All rights reserved.
 
-exec python3 file/genStrSession.py
+exec python3 file/strGenSession.py
