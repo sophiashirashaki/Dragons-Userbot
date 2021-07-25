@@ -4,7 +4,7 @@ FROM apiskinguserbot/kinguserbot:Buster
 # clonning repo 
 RUN git clone https://github.com/TeamDragons/Dragons-Userbot.git /root/dragons
 # working directory 
-WORKDIR /root/userbot
+WORKDIR /root/dragons
 
 # Install requirements
 RUN pip3 install -U -r requirements.txt
