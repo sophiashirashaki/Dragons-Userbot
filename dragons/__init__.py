@@ -9,8 +9,8 @@ from .sql_helper.globals import addgvar, delgvar, gvarstatus
 
 __version__ = "beta"
 __license__ = "MIT License TeamDragons"
-__author__ = "DragonsUserBot <https://github.com/TeamDragons/Dragons-Userbot>"
-__copyright__ = "DragonsUserBot Copyright (C) 2021  " + __author__
+__author__ = "DragonsUserbot <https://github.com/TeamDragons/Dragons-Userbot>"
+__copyright__ = "TeamDragons Copyright (C) 2021  " + __author__
 
 catub.version = __version__
 catub.tgbot.version = __version__
@@ -20,10 +20,8 @@ bot = catub
 StartTime = time.time()
 dragonsversion = "beta"
 
-if Config.UPSTREAM_REPO == "badcat":
-    UPSTREAM_REPO_URL = "https://github.com/Jisan09/catuserbot"
-elif Config.UPSTREAM_REPO == "goodcat":
-    UPSTREAM_REPO_URL = "https://github.com/sandy1709/catuserbot"
+if Config.UPSTREAM_REPO == "dragons":
+    UPSTREAM_REPO_URL = "https://github.com/TeamDragons/Dragons-Userbot"
 else:
     UPSTREAM_REPO_URL = Config.UPSTREAM_REPO
 
