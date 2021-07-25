@@ -1,2 +1,1 @@
-# Dragons-Userbot
-Userbot Yang Di Bikin Dengan Telethon
+Sedang Dalam Masa Recode...
