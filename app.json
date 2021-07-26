@@ -6,9 +6,10 @@
     "plugin",
     "modular",
     "productivity",
+    "dragons",
     "python"
   ],
-  "repository": "https://github.com/TeamDragons/Dragons-Userbot/",
+  "repository": "https://github.com/TeamDragons/Dragons-Userbot",
   "website": "# WORKING",
   "success_url": "# WORKING",
   "env": {
