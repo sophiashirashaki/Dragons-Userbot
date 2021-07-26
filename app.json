@@ -1,0 +1,87 @@
+{
+  "name": "Dragons-Userbot",
+  "description": "Userbot Telegram, Dibuat Para Developer TeamDragons",
+  "logo": "https://telegra.ph/file/3d60313110c58684b31ea.jpg",
+  "keywords": [
+    "plugin",
+    "modular",
+    "productivity",
+    "python"
+  ],
+  "repository": "https://github.com/TeamDragons/Dragons-Userbot/",
+  "website": "# WORKING",
+  "success_url": "# WORKING",
+  "env": {
+    "ALIVE_NAME": {
+      "description": "Isi Nama Telegram Kalian",
+      "value": ""
+    },
+    "APP_ID": {
+      "description": "Isi APP_ID Dengan Web my.telegram.org",
+      "value": ""
+    },
+    "API_HASH": {
+      "description": "Isi API_HASH Dengan Web my.telegram.org",
+      "value": ""
+    },
+    "STRING_SESSION": {
+      "description": "Isi String Session Kalian, Gabung Grup Support Kami @KingUserbotSupport Lalu Ketik #string",
+      "value": ""
+    },
+    "TG_BOT_TOKEN": {
+      "description": "Isi Bot Token Kalian Di @BotFather Yang Telah Kalian Buat, Untuk Inline Button",
+      "value": ""
+    },
+    "COMMAND_HAND_LER": {
+      "description": "Set Perintah handler, Sesuka Kalian (. , ' `)",
+      "value": ".",
+      "required": false
+    },
+    "ENV": {
+      "description": "Pengaturan Untuk ANYTHING Pasang Di Heroku ",
+      "value": "ANYTHING",
+      "required": false
+    },
+    "HEROKU_API_KEY": {
+      "description": "Isi HEROKU_API_KEY Kalian, Ada Di Bagian Account, Atau Bisa Lihat Di (https://dashboard.heroku.com/account)",
+      "value": "",
+      "required": true
+    },
+    "HEROKU_APP_NAME": {
+      "description": "Isi HEROKU_APP_NAME Kalian Di Atas Yang Telah Kalian Buat Tadi (app.name)",
+      "value": "",
+      "required": true
+    },
+    "TZ": {
+      "description": "Asal Kota Dan Negara Kalian Biarkan Saja (Asia/Kolkata)",
+      "value": "Asia/Kolkata",
+      "required": false
+    },
+    "UPSTREAM_REPO": {
+      "description": "Repo Link Resmi Kami, Mohon Jangan Di Ganti",
+      "value": "dragons",
+      "required": false
+    }
+  },
+  "addons": [{
+    "plan": "heroku-postgresql",
+    "options": {
+      "version": "12"
+    }
+  }],
+  "buildpacks": [{
+    "url": "https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest"
+  },{
+    "url":"https://github.com/heroku/heroku-buildpack-google-chrome"
+  },{
+    "url":"https://github.com/heroku/heroku-buildpack-chromedriver"
+  },{
+    "url": "https://github.com/opendoor-labs/heroku-buildpack-p7zip"
+  },{
+    "url": "https://github.com/heroku/heroku-buildpack-apt.git"
+  },{
+    "url": "https://github.com/chrismytton/heroku-buildpack-jq"
+  },{
+    "url": "heroku/python"
+  }]
+}
