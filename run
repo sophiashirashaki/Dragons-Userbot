@@ -1,4 +1,5 @@
-#!/bin/bash
+#---------------------------------------------WORKER-BASH-RUN------------------------------------------------->
+# (C) Copyright 2021 TeamDragons
 
 _get_ziplink () {
     local regex
@@ -29,9 +30,6 @@ _get_repolink () {
     if [[ $UPSTREAM_REPO == "dragons" ]]
     then
         rlink=`echo "aHR0cHM6Ly9naXRodWIuY29tL1RlYW1EcmFnb25zL0RyYWdvbnMtVXNlcmJvdA==" | base64 -d`
-    elif [[ $UPSTREAM_REPO == "badcat" ]]
-    then
-        rlink=`echo "aHR0cHM6Ly9naXRodWIuY29tL0ppc2FuMDkvY2F0dXNlcmJvdA==" | base64 -d`
     elif [[ $UPSTREAM_REPO =~ $regex ]]
     then
         rlink=`echo "${UPSTREAM_REPO}"`
@@ -80,7 +78,7 @@ _set_bot () {
     DRGPATH=$(zipinfo -1 "$zippath" | grep -v "/.");
     unzip -qq "$zippath"
     echo "Done"
-    echo "  Merapihkan ..."
+    echo "  Cleaning ..."
     rm -rf "$zippath"
     _run_dragons_git
     cd $DRGPATH
