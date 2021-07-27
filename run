@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Codex
+# user dragons the userbot
 # (C) Copyright 2021 TeamDragons
 # All rights reserved
 #
@@ -14,7 +14,7 @@ _get_ziplink () {
         echo "aHR0cHM6Ly9naXRodWIuY29tL0NvZGV4L0NvZGV4L2FyY2hpdmUvbWFzdGVyLnppcA==" | base64 -d
     elif [[ $UPSTREAM_REPO == "dragons" ]]
     then
-        echo "aHR0cHM6Ly9naXRodWIuY29tL0NvZGV4NTEvQ29kZXguemlw" | base64 -d
+        echo "aHR0cHM6Ly9naXRodWIuY29tL1RlYW1EcmFnb25zL0RyYWdvbnMtVXNlcmJvdC9hcmNoaXZlL21haW4uemlw" | base64 -d
     elif [[ $UPSTREAM_REPO =~ $regex ]]
     then
         if [[ $UPSTREAM_REPO_BRANCH ]]
