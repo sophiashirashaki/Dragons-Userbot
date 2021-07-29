@@ -4,7 +4,7 @@ from telethon.network.connection.tcpabridged import ConnectionTcpAbridged
 from telethon.sessions import StringSession
 
 from ..Config import Config
-from .client import CatUserBotClient
+from .client import DrgUserBotClient
 
 __version__ = "beta"
 
@@ -16,7 +16,7 @@ else:
     session = "Dragons-Userbot"
 
 try:
-    catub = CatUserBotClient(
+    drgub = DrgUserBotClient(
         session=session,
         api_id=Config.APP_ID,
         api_hash=Config.API_HASH,
@@ -31,8 +31,8 @@ except Exception as e:
     sys.exit()
 
 
-catub.tgbot = tgbot = CatUserBotClient(
-    session="CatTgbot",
+drgub.tgbot = tgbot = DrgUserBotClient(
+    session="DrgTgbot",
     api_id=Config.APP_ID,
     api_hash=Config.API_HASH,
     loop=loop,
