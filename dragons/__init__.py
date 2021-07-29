@@ -8,13 +8,13 @@ from .core.session import catub
 from .sql_helper.globals import addgvar, delgvar, gvarstatus
 
 __version__ = "beta"
-__license__ = "MIT License TeamDragons"
-__author__ = "DragonsUserbot <https://github.com/TeamDragons/Dragons-Userbot>"
-__copyright__ = "TeamDragons Copyright (C) 2021  " + __author__
+__license__ = "MIT License"
+__author__ = "Dragons-Userbot <https://github.com/TeamDragons/Dragons-Userbot>"
+__copyright__ = "(C) Copyright 2021 TeamDragons  " + __author__
 
 catub.version = __version__
 catub.tgbot.version = __version__
-LOGS = logging.getLogger("DragonsUserbot")
+LOGS = logging.getLogger("Dragons-Userbot")
 bot = catub
 
 StartTime = time.time()
@@ -59,7 +59,7 @@ except Exception:
     HEROKU_APP = None
 
 
-# ------------------------------Global Configiables--------------------------- >
+# ------------------------------Global-Configiables--------------------------- >
 COUNT_MSG = 0
 USERS = {}
 COUNT_PM = {}
