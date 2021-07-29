@@ -38,7 +38,7 @@ sudo_enabledcmds = sudo_enabled_cmds()
 
 
 class DrgUserBotClient(TelegramClient):
-    def cat_cmd(
+    def drg_cmd(
         self: TelegramClient,
         pattern: str or tuple = None,
         info: Union[str, Dict[str, Union[str, List[str], Dict[str, str]]]]
