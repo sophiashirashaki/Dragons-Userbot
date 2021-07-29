@@ -6,14 +6,14 @@ from telethon.sessions import StringSession
 from ..Config import Config
 from .client import CatUserBotClient
 
-__version__ = "2.10.6"
+__version__ = "beta"
 
 loop = None
 
 if Config.STRING_SESSION:
     session = StringSession(str(Config.STRING_SESSION))
 else:
-    session = "catuserbot"
+    session = "Dragons-Userbot"
 
 try:
     catub = CatUserBotClient(
