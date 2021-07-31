@@ -46,8 +46,8 @@ def load_module(shortname, plugin_path=None):
         mod.CMD_HELP = CMD_HELP
         mod.reply_id = reply_id
         mod.admin_cmd = admin_cmd
-        mod._catutils = _catutils
-        mod._cattools = _cattools
+        mod._drgutils = _drgutils
+        mod._drgtools = _drgtools
         mod.media_type = media_type
         mod.edit_delete = edit_delete
         mod.install_pip = install_pip
@@ -85,8 +85,8 @@ def remove_plugin(shortname):
     try:
         name = f"dragons.plugins.{shortname}"
         for i in reversed(range(len(catub._event_builders))):
-            ev, cb = drgub._event_builders[i]
-            if cb.__module__ == name:
+            ev, db = drgub._event_builders[i]
+            if db.__module__ == name:
                 del drgub._event_builders[i]
     except BaseException:
         raise ValueError
