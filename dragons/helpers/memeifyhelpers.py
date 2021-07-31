@@ -7,9 +7,9 @@ from colour import Color as asciiColor
 from PIL import Image, ImageDraw, ImageFont
 from wand.color import Color
 from wand.drawing import Drawing
-from wand.image import Image as catimage
+from wand.image import Image as drgimage
 
-from .utils import _catutils
+from .utils import _drgutils
 
 MARGINS = [50, 150, 250, 350, 450]
 
@@ -129,6 +129,6 @@ async def silently_send_message(conv, text):
 
 
 async def thumb_from_audio(audio_path, output):
-    await _catutils.runcmd(
+    await _drgutils.runcmd(
         f"ffmpeg -i {audio_path} -filter:v scale=500:500 -an {output}"
     )
