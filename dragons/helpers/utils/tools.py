@@ -37,7 +37,7 @@ async def media_to_pic(event, reply, noedits=False):  # sourcery no-metrics
         os.remove(drgfile)
     if mediatype == "Photo":
         drgmedia = await reply.download_media(file="./temp")
-        im = Image.open(catmedia)
+        im = Image.open(drgmedia)
         im.save(drgfile)
     elif mediatype in ["Audio", "Voice"]:
         await event.client.download_media(reply, drgfile, thumb=-1)
@@ -53,7 +53,7 @@ async def media_to_pic(event, reply, noedits=False):  # sourcery no-metrics
             im.save(drgfile)
     elif mediatype in ["Round Video", "Video", "Gif"]:
         await event.client.download_media(reply, drgfile, thumb=-1)
-        if not os.path.exists(catfile):
+        if not os.path.exists(drgfile):
             drgmedia = await reply.download_media(file="./temp")
             clip = VideoFileClip(media)
             try:
@@ -69,7 +69,7 @@ async def media_to_pic(event, reply, noedits=False):  # sourcery no-metrics
             im.save(drgfile)
     if catmedia and os.path.lexists(drgmedia):
         os.remove(drgmedia)
-    if os.path.lexists(catfile):
+    if os.path.lexists(drgfile):
         return drgevent, drgfile, mediatype
     return drgevent, None
 
