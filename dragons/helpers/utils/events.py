@@ -20,10 +20,10 @@ async def reply_id(event):
 
 
 async def get_user_from_event(
-    event, catevent=None, secondgroup=None, nogroup=False, noedits=False
+    event, drgevent=None, secondgroup=None, nogroup=False, noedits=False
 ):  # sourcery no-metrics
-    if catevent is None:
-        catevent = event
+    if drgevent is None:
+        drgevent = event
     if nogroup is False:
         if secondgroup:
             args = event.pattern_match.group(2).split(" ", 1)
@@ -61,27 +61,27 @@ async def get_user_from_event(
             previous_message = await event.get_reply_message()
             if previous_message.from_id is None:
                 if not noedits:
-                    await edit_delete(catevent, "`Well that's an anonymous admin !`")
+                    await edit_delete(drgevent, "`Well that's an anonymous admin !`")
                 return None, None
             user_obj = await event.client.get_entity(previous_message.sender_id)
             return user_obj, extra
         elif not args:
             if not noedits:
                 await edit_delete(
-                    catevent, "`Pass the user's username, id or reply!`", 5
+                    drgevent, "`Pass the user's username, id or reply!`", 5
                 )
             return None, None
     except Exception as e:
         LOGS.error(str(e))
     if not noedits:
-        await edit_delete(catevent, "__Couldn't fetch user to proceed further.__")
+        await edit_delete(drgevent, "__Couldn't fetch user to proceed further__")
     return None, None
 
 
-async def checking(catub):
-    cat_c = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
+async def checking(user):
+    drg_c = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
     try:
-        cat_channel = Get(cat_c)
-        await catub(cat_channel)
+        drg_channel = Get(drg_c)
+        await user(drg_channel)
     except BaseException:
         pass
