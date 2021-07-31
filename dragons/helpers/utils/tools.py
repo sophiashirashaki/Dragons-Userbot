@@ -26,35 +26,35 @@ async def media_to_pic(event, reply, noedits=False):  # sourcery no-metrics
     ]:
         return event, None
     if not noedits:
-        catevent = await edit_or_reply(
+        drgevent = await edit_or_reply(
             event, f"`Transfiguration Time! Converting to ....`"
         )
     else:
-        catevent = event
-    catmedia = None
-    catfile = os.path.join("./temp/", "meme.png")
-    if os.path.exists(catfile):
-        os.remove(catfile)
+        drgevent = event
+    drgmedia = None
+    drgfile = os.path.join("./temp/", "meme.png")
+    if os.path.exists(drgfile):
+        os.remove(drgfile)
     if mediatype == "Photo":
-        catmedia = await reply.download_media(file="./temp")
+        drgmedia = await reply.download_media(file="./temp")
         im = Image.open(catmedia)
-        im.save(catfile)
+        im.save(drgfile)
     elif mediatype in ["Audio", "Voice"]:
-        await event.client.download_media(reply, catfile, thumb=-1)
+        await event.client.download_media(reply, drgfile, thumb=-1)
     elif mediatype == "Sticker":
-        catmedia = await reply.download_media(file="./temp")
-        if catmedia.endswith(".tgs"):
-            catcmd = f"lottie_convert.py --frame 0 -if lottie -of png '{catmedia}' '{catfile}'"
-            stdout, stderr = (await runcmd(catcmd))[:2]
+        drgmedia = await reply.download_media(file="./temp")
+        if drgmedia.endswith(".tgs"):
+            drgcmd = f"lottie_convert.py --frame 0 -if lottie -of png '{drgmedia}' '{drgfile}'"
+            stdout, stderr = (await runcmd(drgcmd))[:2]
             if stderr:
                 LOGS.info(stdout + stderr)
-        elif catmedia.endswith(".webp"):
-            im = Image.open(catmedia)
-            im.save(catfile)
+        elif drgmedia.endswith(".webp"):
+            im = Image.open(drgmedia)
+            im.save(drgfile)
     elif mediatype in ["Round Video", "Video", "Gif"]:
-        await event.client.download_media(reply, catfile, thumb=-1)
+        await event.client.download_media(reply, drgfile, thumb=-1)
         if not os.path.exists(catfile):
-            catmedia = await reply.download_media(file="./temp")
+            drgmedia = await reply.download_media(file="./temp")
             clip = VideoFileClip(media)
             try:
                 clip = clip.save_frame(catfile, 0.1)
@@ -64,14 +64,14 @@ async def media_to_pic(event, reply, noedits=False):  # sourcery no-metrics
         mimetype = reply.document.mime_type
         mtype = mimetype.split("/")
         if mtype[0].lower() == "image":
-            catmedia = await reply.download_media(file="./temp")
-            im = Image.open(catmedia)
-            im.save(catfile)
-    if catmedia and os.path.lexists(catmedia):
-        os.remove(catmedia)
+            drgmedia = await reply.download_media(file="./temp")
+            im = Image.open(drgmedia)
+            im.save(drgfile)
+    if catmedia and os.path.lexists(drgmedia):
+        os.remove(drgmedia)
     if os.path.lexists(catfile):
-        return catevent, catfile, mediatype
-    return catevent, None
+        return drgevent, drgfile, mediatype
+    return drgevent, None
 
 
 async def take_screen_shot(
