@@ -3,7 +3,7 @@ from datetime import datetime
 
 from telethon.tl import functions, types
 
-from userbot import catub
+from dragons import drgub
 
 from ..Config import Config
 from ..core.logger import logging
@@ -34,7 +34,7 @@ class AFK:
 AFK_ = AFK()
 
 
-@catub.cat_cmd(outgoing=True, edited=False)
+@drgub.drg_cmd(outgoing=True, edited=False)
 async def set_not_afk(event):
     if AFK_.afk_on is False:
         return
@@ -80,7 +80,7 @@ async def set_not_afk(event):
             )
 
 
-@catub.cat_cmd(
+@drgub.drg_cmd(
     incoming=True, func=lambda e: bool(e.mentioned or e.is_private), edited=False
 )
 async def on_afk(event):  # sourcery no-metrics
@@ -165,7 +165,7 @@ async def on_afk(event):  # sourcery no-metrics
             )
 
 
-@catub.cat_cmd(
+@drgub.drg_cmd(
     pattern="afk(?:\s|$)([\s\S]*)",
     command=("afk", plugin_category),
     info={
@@ -225,7 +225,7 @@ async def _(event):
                 )
 
 
-@catub.cat_cmd(
+@drgub.drg_cmd(
     pattern="mafk(?:\s|$)([\s\S]*)",
     command=("mafk", plugin_category),
     info={
