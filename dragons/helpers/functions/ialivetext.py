@@ -41,7 +41,7 @@ def check_data_base_heal_th():
     return is_database_working, output
 
 
-async def catalive(StartTime):
+async def drgalive(StartTime):
     _, check_sgnirts = check_data_base_heal_th()
     sudo = "Enabled" if Config.SUDO_USERS else "Disabled"
     uptime = await get_readable_time((time.time() - StartTime))
@@ -83,7 +83,7 @@ async def catalive(StartTime):
         dyno = f"{AppHours}h {AppMinutes}m/{hours}h {minutes}m"
     except Exception as e:
         dyno = e
-    return f"Catuserbot Stats\
+    return f"Dragons-Userbo Stats\
                  \n\nDatabase : {check_sgnirts}\
                   \nSudo : {sudo}\
                   \nUptime : {uptime}\
