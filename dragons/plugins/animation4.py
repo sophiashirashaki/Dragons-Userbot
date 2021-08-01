@@ -1,11 +1,11 @@
 import asyncio
 
-from . import ALIVE_NAME, catub, edit_or_reply
+from . import ALIVE_NAME, drgub, edit_or_reply
 
 plugin_category = "fun"
 
 
-@catub.cat_cmd(
+@drgub.drg_cmd(
     pattern="kilr(?:\s|$)([\s\S]*)",
     command=("kilr", plugin_category),
     info={
@@ -36,7 +36,7 @@ async def _(event):
         await event.edit(animation_chars[i % 8])
 
 
-@catub.cat_cmd(
+@drgub.drg_cmd(
     pattern="eye$",
     command=("eye", plugin_category),
     info={
@@ -68,7 +68,7 @@ async def _(event):
     await event.delete()
 
 
-@catub.cat_cmd(
+@drgub.drg_cmd(
     pattern="thinking$",
     command=("thinking", plugin_category),
     info={
@@ -124,7 +124,7 @@ async def _(event):
         await event.edit(animation_chars[i % 36])
 
 
-@catub.cat_cmd(
+@drgub.drg_cmd(
     pattern="snake$",
     command=("snake", plugin_category),
     info={
@@ -171,7 +171,7 @@ async def _(event):
         await event.edit(animation_chars[i % 27])
 
 
-@catub.cat_cmd(
+@drgub.drg_cmd(
     pattern="human$",
     command=("human", plugin_category),
     info={
@@ -207,7 +207,7 @@ async def _(event):
         await event.edit(animation_chars[i % 16])
 
 
-@catub.cat_cmd(
+@drgub.drg_cmd(
     pattern="mc$",
     command=("mc", plugin_category),
     info={
@@ -255,7 +255,7 @@ async def _(event):
         await event.edit(animation_chars[i % 28])
 
 
-@catub.cat_cmd(
+@drgub.drg_cmd(
     pattern="virus$",
     command=("virus", plugin_category),
     info={
@@ -305,7 +305,7 @@ async def _(event):
         await event.edit(animation_chars[i % 30])
 
 
-@catub.cat_cmd(
+@drgub.drg_cmd(
     pattern="repe$",
     command=("repe", plugin_category),
     info={
@@ -355,7 +355,7 @@ async def _(event):
         await event.edit(animation_chars[i % 30])
 
 
-@catub.cat_cmd(
+@drgub.drg_cmd(
     pattern="nikal$",
     command=("nikal", plugin_category),
     info={
@@ -381,7 +381,7 @@ async def _(event):
         await event.edit(animation_chars[i % 6])
 
 
-@catub.cat_cmd(
+@drgub.drg_cmd(
     pattern="music$",
     command=("music", plugin_category),
     info={
@@ -412,7 +412,7 @@ async def _(event):
         await event.edit(animation_chars[i % 11])
 
 
-@catub.cat_cmd(
+@drgub.drg_cmd(
     pattern="squ$",
     command=("squ", plugin_category),
     info={
