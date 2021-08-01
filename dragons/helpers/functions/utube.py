@@ -31,11 +31,11 @@ name_dl = (
 )
 
 
-async def yt_search(cat):
+async def yt_search(drg):
     try:
-        cat = urllib.parse.quote(cat)
+        drg = urllib.parse.quote(drg)
         html = urllib.request.urlopen(
-            "https://www.youtube.com/results?search_query=" + cat
+            "https://www.youtube.com/results?search_query=" + drg
         )
         user_data = re.findall(r"watch\?v=(\S{11})", html.read().decode())
         video_link = []
