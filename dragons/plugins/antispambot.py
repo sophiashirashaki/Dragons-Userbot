@@ -21,8 +21,8 @@ if Config.ANTISPAMBOT_BAN:
         if not event.user_joined and not event.user_added:
             return
         user = await event.get_user()
-        catadmin = await is_admin(event.client, event.chat_id, event.client.uid)
-        if not catadmin:
+        drgadmin = await is_admin(event.client, event.chat_id, event.client.uid)
+        if not drgadmin:
             return
         catbanned = None
         adder = None
@@ -41,8 +41,8 @@ if Config.ANTISPAMBOT_BAN:
         if ignore:
             return
         if is_gbanned(user.id):
-            catgban = get_gbanuser(user.id)
-            if catgban.reason:
+            drggban = get_gbanuser(user.id)
+            if drggban.reason:
                 hmm = await event.reply(
                     f"[{user.first_name}](tg://user?id={user.id}) was gbanned by you for the reason `{catgban.reason}`"
                 )
@@ -54,10 +54,10 @@ if Config.ANTISPAMBOT_BAN:
                 await event.client.edit_permissions(
                     event.chat_id, user.id, view_messages=False
                 )
-                catbanned = True
+                drgbanned = True
             except Exception as e:
                 LOGS.info(e)
-        if spamwatch and not catbanned:
+        if spamwatch and not drgbanned:
             ban = spamwatch.get_ban(user.id)
             if ban:
                 hmm = await event.reply(
@@ -67,10 +67,10 @@ if Config.ANTISPAMBOT_BAN:
                     await event.client.edit_permissions(
                         event.chat_id, user.id, view_messages=False
                     )
-                    catbanned = True
+                    drgbanned = True
                 except Exception as e:
                     LOGS.info(e)
-        if not catbanned:
+        if not drgbanned:
             try:
                 casurl = "https://api.cas.chat/check?user_id={}".format(user.id)
                 data = get(casurl).json()
@@ -88,10 +88,10 @@ if Config.ANTISPAMBOT_BAN:
                     await event.client.edit_permissions(
                         event.chat_id, user.id, view_messages=False
                     )
-                    catbanned = True
+                    drgbanned = True
                 except Exception as e:
                     LOGS.info(e)
-        if BOTLOG and catbanned:
+        if BOTLOG and drgbanned:
             await event.client.send_message(
                 BOTLOG_CHATID,
                 "#ANTISPAMBOT\n"
@@ -141,12 +141,12 @@ async def caschecker(event):
         if not cas_count:
             text = "No CAS Banned users found!"
     except ChatAdminRequiredError as carerr:
-        await catevent.edit("`CAS check failed: Admin privileges are required`")
+        await drgevent.edit("`CAS check failed: Admin privileges are required`")
         return
     except BaseException as be:
         await catevent.edit("`CAS check failed`")
         return
-    await catevent.edit(text)
+    await drgevent.edit(text)
 
 
 @drgub.drg_cmd(
@@ -190,10 +190,10 @@ async def caschecker(event):
         if not cas_count:
             text = "No spamwatch Banned users found!"
     except ChatAdminRequiredError as carerr:
-        await catevent.edit("`spamwatch check failed: Admin privileges are required`")
+        await drgevent.edit("`spamwatch check failed: Admin privileges are required`")
         return
     except BaseException as be:
-        await catevent.edit("`spamwatch check failed`")
+        await drgevent.edit("`spamwatch check failed`")
         return
     await catevent.edit(text)
 
