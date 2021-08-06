@@ -195,7 +195,7 @@ async def caschecker(event):
     except BaseException as be:
         await drgevent.edit("`spamwatch check failed`")
         return
-    await catevent.edit(text)
+    await drgevent.edit(text)
 
 
 def banchecker(user_id):
