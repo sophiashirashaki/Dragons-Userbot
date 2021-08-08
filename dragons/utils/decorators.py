@@ -277,7 +277,7 @@ def command(**args):
     def decorator(func):
         if allow_edited_updates:
             drgub.add_event_handler(func, MessageEdited(**args))
-        catub.add_event_handler(func, NewMessage(**args))
+        drgub.add_event_handler(func, NewMessage(**args))
         try:
             LOAD_PLUG[file_test].append(func)
         except BaseException:
