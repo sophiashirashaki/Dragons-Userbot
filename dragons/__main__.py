@@ -15,7 +15,7 @@ from .utils import (
     verifyLoggerGroup,
 )
 
-LOGS = logging.getLogger("DragonsUserbot")
+LOGS = logging.getLogger("Dragons-Userbot")
 
 print(dragons.__copyright__)
 print("Licensed di bawah ketentuan " + dragons.__license__)
@@ -63,7 +63,7 @@ async def startup_process():
     return
 
 
-catub.loop.run_until_complete(startup_process())
+drgub.loop.run_until_complete(startup_process())
 
 if len(sys.argv) not in (1, 3, 4):
     drgub.disconnect()
