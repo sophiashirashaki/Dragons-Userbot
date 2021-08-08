@@ -10,7 +10,7 @@ from ..Config import Config
 from ..core.data import _sudousers_list, blacklist_chats_list
 from ..core.events import MessageEdited, NewMessage
 from ..core.logger import logging
-from ..core.session import catub
+from ..core.session import drgub
 from ..helpers.utils.format import paste_message
 from ..helpers.utils.utils import runcmd
 from ..sql_helper.globals import gvarstatus
@@ -37,12 +37,12 @@ def admin_cmd(pattern=None, command=None, **args):  # sourcery no-metrics
                 CMD_LIST.update({file_test: [cmd]})
         else:
             if len(Config.COMMAND_HAND_LER) == 2:
-                catreg = "^" + Config.COMMAND_HAND_LER
+                drgreg = "^" + Config.COMMAND_HAND_LER
                 reg = Config.COMMAND_HAND_LER[1]
             elif len(Config.COMMAND_HAND_LER) == 1:
-                catreg = "^\\" + Config.COMMAND_HAND_LER
+                drgreg = "^\\" + Config.COMMAND_HAND_LER
                 reg = Config.COMMAND_HAND_LER
-            args["pattern"] = re.compile(catreg + pattern)
+            args["pattern"] = re.compile(drgreg + pattern)
             if command is not None:
                 cmd = reg + command
             else:
@@ -89,12 +89,12 @@ def sudo_cmd(pattern=None, command=None, **args):  # sourcery no-metrics
                 SUDO_LIST.update({file_test: [cmd]})
         else:
             if len(Config.SUDO_COMMAND_HAND_LER) == 2:
-                catreg = "^" + Config.SUDO_COMMAND_HAND_LER
+                drgreg = "^" + Config.SUDO_COMMAND_HAND_LER
                 reg = Config.SUDO_COMMAND_HAND_LER[1]
             elif len(Config.SUDO_COMMAND_HAND_LER) == 1:
-                catreg = "^\\" + Config.SUDO_COMMAND_HAND_LER
+                drgreg = "^\\" + Config.SUDO_COMMAND_HAND_LER
                 reg = Config.COMMAND_HAND_LER
-            args["pattern"] = re.compile(catreg + pattern)
+            args["pattern"] = re.compile(drgreg + pattern)
             if command is not None:
                 cmd = reg + command
             else:
@@ -276,7 +276,7 @@ def command(**args):
 
     def decorator(func):
         if allow_edited_updates:
-            catub.add_event_handler(func, MessageEdited(**args))
+            drgub.add_event_handler(func, MessageEdited(**args))
         catub.add_event_handler(func, NewMessage(**args))
         try:
             LOAD_PLUG[file_test].append(func)
