@@ -5,7 +5,7 @@ from dragons import BOTLOG_CHATID, HEROKU_APP, PM_LOGGER_GROUP_ID
 
 from .Config import Config
 from .core.logger import logging
-from .core.session import catub
+from .core.session import drgub
 from .utils import (
     add_bot_to_logger_group,
     ipchange,
@@ -24,7 +24,7 @@ cmdhr = Config.COMMAND_HAND_LER
 
 try:
     LOGS.info("Memulai Userbot")
-    catub.loop.run_until_complete(setup_bot())
+    drgub.loop.run_until_complete(setup_bot())
     LOGS.info("TG Bot Startup Berhasil")
 except Exception as e:
     LOGS.error(f"{str(e)}")
@@ -36,13 +36,13 @@ class CatCheck:
         self.sucess = True
 
 
-Catcheck = CatCheck()
+Drgcheck = DrgCheck()
 
 
 async def startup_process():
     check = await ipchange()
     if check is not None:
-        Catcheck.sucess = False
+        Drgcheck.sucess = False
         return
     await verifyLoggerGroup()
     await load_plugins("plugins")
@@ -59,19 +59,19 @@ async def startup_process():
     if PM_LOGGER_GROUP_ID != -100:
         await add_bot_to_logger_group(PM_LOGGER_GROUP_ID)
     await startupmessage()
-    Catcheck.sucess = True
+    Drgcheck.sucess = True
     return
 
 
 catub.loop.run_until_complete(startup_process())
 
 if len(sys.argv) not in (1, 3, 4):
-    catub.disconnect()
-elif not Catcheck.sucess:
+    drgub.disconnect()
+elif not Drgcheck.sucess:
     if HEROKU_APP is not None:
         HEROKU_APP.restart()
 else:
     try:
-        catub.run_until_disconnected()
+        drgub.run_until_disconnected()
     except ConnectionError:
         pass
