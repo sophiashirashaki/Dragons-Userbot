@@ -2,8 +2,8 @@ from datetime import datetime
 
 from telethon.utils import get_display_name
 
-from userbot import drgub
-from userbot.core.logger import logging
+from dragons import drgub
+from dragons.core.logger import logging
 
 from ..core.data import blacklist_chats_list
 from ..core.managers import edit_delete, edit_or_reply
