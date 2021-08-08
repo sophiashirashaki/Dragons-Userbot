@@ -4,7 +4,7 @@ import heroku3
 
 from .Config import Config
 from .core.logger import logging
-from .core.session import catub
+from .core.session import drgub
 from .sql_helper.globals import addgvar, delgvar, gvarstatus
 
 __version__ = "beta"
@@ -12,10 +12,10 @@ __license__ = "MIT License"
 __author__ = "Dragons-Userbot <https://github.com/TeamDragons/Dragons-Userbot>"
 __copyright__ = "(C) Copyright 2021 TeamDragons  " + __author__
 
-catub.version = __version__
-catub.tgbot.version = __version__
+drgub.version = __version__
+drgub.tgbot.version = __version__
 LOGS = logging.getLogger("Dragons-Userbot")
-bot = catub
+bot = drgub
 
 StartTime = time.time()
 dragonsversion = "beta"
