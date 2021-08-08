@@ -311,7 +311,7 @@ async def upstream(event):
     await deploy(event, repo, ups_rem, ac_br, txt)
 
 
-@drgub.cat_cmd(
+@drgub.drg_cmd(
     pattern="baddrg$",
     command=("baddrg", plugin_category),
     info={
