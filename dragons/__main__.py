@@ -31,7 +31,7 @@ except Exception as e:
     sys.exit()
 
 
-class CatCheck:
+class DrgCheck:
     def __init__(self):
         self.sucess = True
 
