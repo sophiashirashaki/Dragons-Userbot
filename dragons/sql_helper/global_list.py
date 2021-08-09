@@ -6,7 +6,7 @@ from . import BASE, SESSION
 
 
 class CatGloballist(BASE):
-    __tablename__ = "catglobal_list"
+    __tablename__ = "drgglobal_list"
     keywoard = Column(UnicodeText, primary_key=True)
     group_id = Column(String, primary_key=True, nullable=False)
 
@@ -15,7 +15,7 @@ class CatGloballist(BASE):
         self.group_id = str(group_id)
 
     def __repr__(self):
-        return "<Cat global values '%s' for %s>" % (self.group_id, self.keywoard)
+        return "<Dragons global values '%s' for %s>" % (self.group_id, self.keywoard)
 
     def __eq__(self, other):
         return bool(
@@ -39,16 +39,16 @@ GLOBALLIST_SQL_ = GLOBALLIST_SQL()
 
 
 def add_to_list(keywoard, group_id):
-    with CATGLOBALLIST_INSERTION_LOCK:
-        broadcast_group = CatGloballist(keywoard, str(group_id))
+    with DRGGLOBALLIST_INSERTION_LOCK:
+        broadcast_group = DrgGloballist(keywoard, str(group_id))
         SESSION.merge(broadcast_group)
         SESSION.commit()
         GLOBALLIST_SQL_.GLOBALLIST_VALUES.setdefault(keywoard, set()).add(str(group_id))
 
 
 def rm_from_list(keywoard, group_id):
-    with CATGLOBALLIST_INSERTION_LOCK:
-        broadcast_group = SESSION.query(CatGloballist).get((keywoard, str(group_id)))
+    with DRGGLOBALLIST_INSERTION_LOCK:
+        broadcast_group = SESSION.query(DrgGloballist).get((keywoard, str(group_id)))
         if broadcast_group:
             if str(group_id) in GLOBALLIST_SQL_.GLOBALLIST_VALUES.get(keywoard, set()):
                 GLOBALLIST_SQL_.GLOBALLIST_VALUES.get(keywoard, set()).remove(
@@ -63,16 +63,16 @@ def rm_from_list(keywoard, group_id):
 
 
 def is_in_list(keywoard, group_id):
-    with CATGLOBALLIST_INSERTION_LOCK:
-        broadcast_group = SESSION.query(CatGloballist).get((keywoard, str(group_id)))
+    with DRGGLOBALLIST_INSERTION_LOCK:
+        broadcast_group = SESSION.query(DrgGloballist).get((keywoard, str(group_id)))
         return bool(broadcast_group)
 
 
 def del_keyword_list(keywoard):
-    with CATGLOBALLIST_INSERTION_LOCK:
+    with DRGGLOBALLIST_INSERTION_LOCK:
         broadcast_group = (
-            SESSION.query(CatGloballist.keywoard)
-            .filter(CatGloballist.keywoard == keywoard)
+            SESSION.query(DrgGloballist.keywoard)
+            .filter(DrgGloballist.keywoard == keywoard)
             .delete()
         )
         GLOBALLIST_SQL_.GLOBALLIST_VALUES.pop(keywoard)
@@ -85,7 +85,7 @@ def get_collection_list(keywoard):
 
 def get_list_keywords():
     try:
-        chats = SESSION.query(CatGloballist.keywoard).distinct().all()
+        chats = SESSION.query(DrgGloballist.keywoard).distinct().all()
         return [i[0] for i in chats]
     finally:
         SESSION.close()
@@ -93,7 +93,7 @@ def get_list_keywords():
 
 def num_list():
     try:
-        return SESSION.query(CatGloballist).count()
+        return SESSION.query(DrgGloballist).count()
     finally:
         SESSION.close()
 
@@ -101,8 +101,8 @@ def num_list():
 def num_list_keyword(keywoard):
     try:
         return (
-            SESSION.query(CatGloballist.keywoard)
-            .filter(CatGloballist.keywoard == keywoard)
+            SESSION.query(DrgGloballist.keywoard)
+            .filter(DrgGloballist.keywoard == keywoard)
             .count()
         )
     finally:
@@ -111,14 +111,14 @@ def num_list_keyword(keywoard):
 
 def num_list_keywords():
     try:
-        return SESSION.query(func.count(distinct(CatGloballist.keywoard))).scalar()
+        return SESSION.query(func.count(distinct(DrgGloballist.keywoard))).scalar()
     finally:
         SESSION.close()
 
 
 def __load_chat_lists():
     try:
-        chats = SESSION.query(CatGloballist.keywoard).distinct().all()
+        chats = SESSION.query(DrgGloballist.keywoard).distinct().all()
         for (keywoard,) in chats:
             GLOBALLIST_SQL_.GLOBALLIST_VALUES[keywoard] = []
 
