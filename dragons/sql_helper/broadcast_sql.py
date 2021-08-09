@@ -113,7 +113,7 @@ def num_broadcastlist_chat(keywoard):
 
 def num_broadcastlist_chats():
     try:
-        return SESSION.query(func.count(distinct(CatBroadcast.keywoard))).scalar()
+        return SESSION.query(func.count(distinct(DrgBroadcast.keywoard))).scalar()
     finally:
         SESSION.close()
 
