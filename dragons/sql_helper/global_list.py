@@ -5,7 +5,7 @@ from sqlalchemy import Column, String, UnicodeText, distinct, func
 from . import BASE, SESSION
 
 
-class CatGloballist(BASE):
+class DrgGloballist(BASE):
     __tablename__ = "drgglobal_list"
     keywoard = Column(UnicodeText, primary_key=True)
     group_id = Column(String, primary_key=True, nullable=False)
@@ -122,7 +122,7 @@ def __load_chat_lists():
         for (keywoard,) in chats:
             GLOBALLIST_SQL_.GLOBALLIST_VALUES[keywoard] = []
 
-        all_groups = SESSION.query(CatGloballist).all()
+        all_groups = SESSION.query(DrgGloballist).all()
         for x in all_groups:
             GLOBALLIST_SQL_.GLOBALLIST_VALUES[x.keywoard] += [x.group_id]
 
