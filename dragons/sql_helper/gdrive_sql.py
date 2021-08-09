@@ -18,11 +18,11 @@ from . import BASE, SESSION
 
 
 class Gdrive(BASE):
-    __tablename__ = "catgdrive"
+    __tablename__ = "drggdrive"
     cat = Column(String(50), primary_key=True)
 
-    def __init__(self, cat):
-        self.cat = cat
+    def __init__(self, drg):
+        self.drg = drg
 
 
 Gdrive.__table__.create(checkfirst=True)
