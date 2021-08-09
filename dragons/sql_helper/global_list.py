@@ -25,9 +25,9 @@ class CatGloballist(BASE):
         )
 
 
-CatGloballist.__table__.create(checkfirst=True)
+DrgGloballist.__table__.create(checkfirst=True)
 
-CATGLOBALLIST_INSERTION_LOCK = threading.RLock()
+DRGGLOBALLIST_INSERTION_LOCK = threading.RLock()
 
 
 class GLOBALLIST_SQL:
