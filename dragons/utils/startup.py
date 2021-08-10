@@ -12,7 +12,7 @@ from dragons import BOTLOG, BOTLOG_CHATID, PM_LOGGER_GROUP_ID
 
 from ..Config import Config
 from ..core.logger import logging
-from ..core.session import catub
+from ..core.session import drgub
 from ..helpers.utils import install_pip
 from ..sql_helper.global_collection import (
     del_keyword_collectionlist,
@@ -22,7 +22,7 @@ from ..sql_helper.globals import addgvar, delgvar, gvarstatus
 from .pluginmanager import load_module
 from .tools import create_supergroup
 
-LOGS = logging.getLogger("DragonsUserbot")
+LOGS = logging.getLogger("Dragons-Userbot")
 cmdhr = Config.COMMAND_HAND_LER
 
 
@@ -31,23 +31,23 @@ async def setup_bot():
     To set up bot for userbot
     """
     try:
-        await catub.connect()
-        config = await catub(functions.help.GetConfigRequest())
+        await drgub.connect()
+        config = await drgub(functions.help.GetConfigRequest())
         for option in config.dc_options:
-            if option.ip_address == catub.session.server_address:
-                if catub.session.dc_id != option.id:
+            if option.ip_address == drgub.session.server_address:
+                if drgub.session.dc_id != option.id:
                     LOGS.warning(
-                        f"Fixed DC ID in session from {catub.session.dc_id}"
+                        f"Fixed DC ID in session from {drgub.session.dc_id}"
                         f" to {option.id}"
                     )
-                catub.session.set_dc(option.id, option.ip_address, option.port)
-                catub.session.save()
+                drgub.session.set_dc(option.id, option.ip_address, option.port)
+                drgub.session.save()
                 break
-        bot_details = await catub.tgbot.get_me()
+        bot_details = await drgub.tgbot.get_me()
         Config.TG_BOT_USERNAME = f"@{bot_details.username}"
-        # await catub.start(bot_token=Config.TG_BOT_USERNAME)
-        catub.me = await catub.get_me()
-        catub.uid = catub.tgbot.uid = utils.get_peer_id(catub.me)
+        # await drgub.start(bot_token=Config.TG_BOT_USERNAME)
+        drgub.me = await drgub.get_me()
+        drgub.uid = drgub.tgbot.uid = utils.get_peer_id(catub.me)
         if Config.OWNER_ID == 0:
             Config.OWNER_ID = utils.get_peer_id(catub.me)
     except Exception as e:
@@ -61,11 +61,11 @@ async def startupmessage():
     """
     try:
         if BOTLOG:
-            Config.CATUBLOGO = await catub.tgbot.send_file(
+            Config.DRGUBLOGO = await drgub.tgbot.send_file(
                 BOTLOG_CHATID,
                 "https://telegra.ph/file/4e3ba8e8f7e535d5a2abe.jpg",
                 caption="**Your CatUserbot has been started successfully.**",
-                buttons=[(Button.url("Support", "https://t.me/catuserbot"),)],
+                buttons=[(Button.url("Support", "https://t.me/KingUserbotSupport"),)],
             )
     except Exception as e:
         LOGS.error(e)
@@ -79,12 +79,12 @@ async def startupmessage():
         return None
     try:
         if msg_details:
-            await catub.check_testcases()
-            message = await catub.get_messages(msg_details[0], ids=msg_details[1])
+            await drgub.check_testcases()
+            message = await drgub.get_messages(msg_details[0], ids=msg_details[1])
             text = message.text + "\n\n**Ok Bot is Back and Alive.**"
-            await catub.edit_message(msg_details[0], msg_details[1], text)
+            await drgub.edit_message(msg_details[0], msg_details[1], text)
             if gvarstatus("restartupdate") is not None:
-                await catub.send_message(
+                await drgub.send_message(
                     msg_details[0],
                     f"{cmdhr}ping",
                     reply_to=msg_details[1],
@@ -110,7 +110,7 @@ async def ipchange():
         delgvar("ipaddress")
         LOGS.info("Ip Change detected")
         try:
-            await catub.disconnect()
+            await drgub.disconnect()
         except (ConnectionError, CancelledError):
             pass
         return "ip change"
@@ -120,9 +120,9 @@ async def add_bot_to_logger_group(chat_id):
     """
     To add bot to logger groups
     """
-    bot_details = await catub.tgbot.get_me()
+    bot_details = await drgub.tgbot.get_me()
     try:
-        await catub(
+        await drgub(
             functions.messages.AddChatUserRequest(
                 chat_id=chat_id,
                 user_id=bot_details.username,
@@ -131,7 +131,7 @@ async def add_bot_to_logger_group(chat_id):
         )
     except BaseException:
         try:
-            await catub(
+            await drgub(
                 functions.channels.InviteToChannelRequest(
                     channel=chat_id,
                     users=[bot_details.username],
@@ -145,7 +145,7 @@ async def load_plugins(folder):
     """
     To load plugins from the mentioned folder
     """
-    path = f"userbot/{folder}/*.py"
+    path = f"dragons/{folder}/*.py"
     files = glob.glob(path)
     files.sort()
     for name in files:
@@ -160,7 +160,7 @@ async def load_plugins(folder):
                         try:
                             load_module(
                                 shortname.replace(".py", ""),
-                                plugin_path=f"userbot/{folder}",
+                                plugin_path=f"dragons/{folder}",
                             )
                             break
                         except ModuleNotFoundError as e:
@@ -169,9 +169,9 @@ async def load_plugins(folder):
                             if check > 5:
                                 break
                 else:
-                    os.remove(Path(f"userbot/{folder}/{shortname}.py"))
+                    os.remove(Path(f"dragons/{folder}/{shortname}.py"))
             except Exception as e:
-                os.remove(Path(f"userbot/{folder}/{shortname}.py"))
+                os.remove(Path(f"dragons/{folder}/{shortname}.py"))
                 LOGS.info(f"unable to load {shortname} because of error {e}")
 
 
@@ -182,7 +182,7 @@ async def verifyLoggerGroup():
     flag = False
     if BOTLOG:
         try:
-            entity = await catub.get_entity(BOTLOG_CHATID)
+            entity = await drgub.get_entity(BOTLOG_CHATID)
             if not isinstance(entity, types.User) and not entity.creator:
                 if entity.default_banned_rights.send_messages:
                     LOGS.info(
@@ -208,7 +208,7 @@ async def verifyLoggerGroup():
     else:
         descript = "Don't delete this group or change to group(If you change group all your previous snips, welcome will be lost.)"
         _, groupid = await create_supergroup(
-            "CatUserbot BotLog Group", catub, Config.TG_BOT_USERNAME, descript
+            "Dragons Userbot BotLog Group", drgub, Config.TG_BOT_USERNAME, descript
         )
         addgvar("PRIVATE_GROUP_BOT_API_ID", groupid)
         print(
@@ -217,7 +217,7 @@ async def verifyLoggerGroup():
         flag = True
     if PM_LOGGER_GROUP_ID != -100:
         try:
-            entity = await catub.get_entity(PM_LOGGER_GROUP_ID)
+            entity = await drgub.get_entity(PM_LOGGER_GROUP_ID)
             if not isinstance(entity, types.User) and not entity.creator:
                 if entity.default_banned_rights.send_messages:
                     LOGS.info(
@@ -238,6 +238,6 @@ async def verifyLoggerGroup():
             )
     if flag:
         executable = sys.executable.replace(" ", "\\ ")
-        args = [executable, "-m", "userbot"]
+        args = [executable, "-m", "dragons"]
         os.execle(executable, *args, os.environ)
         sys.exit(0)
