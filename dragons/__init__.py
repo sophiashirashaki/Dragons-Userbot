@@ -18,7 +18,7 @@ LOGS = logging.getLogger("Dragons-Userbot")
 bot = drgub
 
 StartTime = time.time()
-dragonsversion = "beta"
+drgversion = "beta"
 
 if Config.UPSTREAM_REPO == "dragons":
     UPSTREAM_REPO_URL = "https://github.com/TeamDragons/Dragons-Userbot"
