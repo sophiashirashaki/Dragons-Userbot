@@ -28,7 +28,7 @@ cmdhr = Config.COMMAND_HAND_LER
 
 async def setup_bot():
     """
-    To set up bot for userbot
+    To set up bot for dragons
     """
     try:
         await drgub.connect()
