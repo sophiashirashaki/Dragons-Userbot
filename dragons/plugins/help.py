@@ -100,9 +100,9 @@ async def grpinfo():
     outstr = "**Plugins in Catuserbot are:**\n\n"
     outstr += f"**👩‍💻 Usage : ** `{cmdprefix}help <plugin name>`\n\n"
     category = ["admin", "bot", "fun", "misc", "tools", "utils", "extra"]
-    for cat in category:
-        plugins = GRP_INFO[cat]
-        outstr += f"**{hemojis[cat]} {cat.title()} **({len(plugins)})\n"
+    for drg in category:
+        plugins = GRP_INFO[drg]
+        outstr += f"**{hemojis[drg]} {drg.title()} **({len(plugins)})\n"
         for plugin in plugins:
             outstr += f"`{plugin}`  "
         outstr += "\n\n"
@@ -112,9 +112,9 @@ async def grpinfo():
 async def cmdlist():
     outstr = "**Total list of Commands in your Catuserbot are :**\n\n"
     category = ["admin", "bot", "fun", "misc", "tools", "utils", "extra"]
-    for cat in category:
-        plugins = GRP_INFO[cat]
-        outstr += f"**{hemojis[cat]} {cat.title()} ** - {len(plugins)}\n\n"
+    for drg in category:
+        plugins = GRP_INFO[drg]
+        outstr += f"**{hemojis[drg]} {drg.title()} ** - {len(plugins)}\n\n"
         for plugin in plugins:
             cmds = PLG_INFO[plugin]
             outstr += f"• **{plugin.title()} has {len(cmds)} commands**\n"
@@ -145,7 +145,7 @@ async def cmdlist():
     },
 )
 async def _(event):
-    "To get guide for catuserbot."
+    "To get guide for dragonsuserbot."
     flag = event.pattern_match.group(1)
     input_str = event.pattern_match.group(2)
     reply_to_id = await reply_id(event)
