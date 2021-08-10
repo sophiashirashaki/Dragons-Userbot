@@ -47,9 +47,9 @@ async def setup_bot():
         Config.TG_BOT_USERNAME = f"@{bot_details.username}"
         # await drgub.start(bot_token=Config.TG_BOT_USERNAME)
         drgub.me = await drgub.get_me()
-        drgub.uid = drgub.tgbot.uid = utils.get_peer_id(catub.me)
+        drgub.uid = drgub.tgbot.uid = utils.get_peer_id(drgub.me)
         if Config.OWNER_ID == 0:
-            Config.OWNER_ID = utils.get_peer_id(catub.me)
+            Config.OWNER_ID = utils.get_peer_id(drgub.me)
     except Exception as e:
         LOGS.error(f"STRING_SESSION - {str(e)}")
         sys.exit()
@@ -64,7 +64,7 @@ async def startupmessage():
             Config.DRGUBLOGO = await drgub.tgbot.send_file(
                 BOTLOG_CHATID,
                 "https://telegra.ph/file/4e3ba8e8f7e535d5a2abe.jpg",
-                caption="**Your CatUserbot has been started successfully.**",
+                caption="**Your Dragons-Userbot has been started successfully.**",
                 buttons=[(Button.url("Support", "https://t.me/KingUserbotSupport"),)],
             )
     except Exception as e:
