@@ -2,7 +2,6 @@ import random
 import re
 import time
 from platform import python_version
-
 from telethon import version
 from telethon.errors.rpcerrorlist import (
     MediaEmptyError,
@@ -10,7 +9,6 @@ from telethon.errors.rpcerrorlist import (
     WebpageMediaEmptyError,
 )
 from telethon.events import CallbackQuery
-
 from dragons import StartTime, drgub, drgversion
 
 from ..Config import Config
@@ -54,9 +52,7 @@ async def amireallyalive(event):
         drg_caption += f"**{EMOJI} Uptime :** `{uptime}\n`"
         drg_caption += f"**{EMOJI} Master:** {mention}\n"
         try:
-            await event.client.send_file(
-                event.chat_id, PIC, caption=drg_caption, reply_to=reply_to_id
-            )
+            await event.client.send_file(event.chat_id, PIC, caption=drg_caption, reply_to=reply_to_id)
             await event.delete()
         except (WebpageMediaEmptyError, MediaEmptyError, WebpageCurlFailedError):
             return await edit_or_reply(
