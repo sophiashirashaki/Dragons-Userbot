@@ -1,6 +1,8 @@
 import random
 import re
 import time
+import asyncio
+
 from platform import python_version
 from telethon import version
 from telethon.errors.rpcerrorlist import (
@@ -53,6 +55,7 @@ async def amireallyalive(event):
         drg_caption += f"**{EMOJI} Master:** {mention}\n"
         try:
             await event.client.send_file(event.chat_id, PIC, caption=drg_caption, reply_to=reply_to_id)
+            await asyncio.sleep(1000)
             await event.delete()
         except (WebpageMediaEmptyError, MediaEmptyError, WebpageCurlFailedError):
             return await edit_or_reply(
@@ -94,6 +97,7 @@ async def amireallyalive(event):
     drg_caption += f"**{EMOJI} Master:** {mention}\n"
     results = await event.client.inline_query(Config.TG_BOT_USERNAME, drg_caption)
     await results[0].click(event.chat_id, reply_to=reply_to_id, hide_via=True)
+    await asyncio.sleep(1000)
     await event.delete()
 
 
