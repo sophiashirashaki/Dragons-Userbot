@@ -50,7 +50,7 @@ async def _(event):
         )
 
 
-@drgub.cat_cmd(
+@drgub.drg_cmd(
     pattern="eval(?:\s|$)([\s\S]*)",
     command=("eval", plugin_category),
     info={
