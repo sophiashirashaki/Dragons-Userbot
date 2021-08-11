@@ -219,8 +219,8 @@ def register(**args):
 
     def decorator(func):
         if not disable_edited:
-            catub.add_event_handler(func, MessageEdited(**args))
-        catub.add_event_handler(func, NewMessage(**args))
+            drgub.add_event_handler(func, MessageEdited(**args))
+        drgub.add_event_handler(func, NewMessage(**args))
         try:
             LOAD_PLUG[file_test].append(func)
         except Exception:
