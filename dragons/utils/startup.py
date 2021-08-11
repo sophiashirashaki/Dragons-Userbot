@@ -63,8 +63,8 @@ async def startupmessage():
         if BOTLOG:
             Config.DRGUBLOGO = await drgub.tgbot.send_file(
                 BOTLOG_CHATID,
-                "https://telegra.ph/file/4e3ba8e8f7e535d5a2abe.jpg",
-                caption="**Your Dragons-Userbot has been started successfully.**",
+                "https://telegra.ph/file/248b4cd5adb27bf33f15c.jpg",
+                caption="**Your Dragons-Userbot has been started successfully**",
                 buttons=[(Button.url("Support", "https://t.me/KingUserbotSupport"),)],
             )
     except Exception as e:
