@@ -41,8 +41,8 @@ async def amireallyalive(event):
     CUSTOM_ALIVE_TEXT = gvarstatus("ALIVE_TEXT") or "✮ MY BOT IS RUNNING SUCCESSFULLY ✮"
     DRG_IMG = gvarstatus("ALIVE_PIC")
     if DRG_IMG:
-        DRAGONS = [x for x in DRG_IMG.split()]
-        A_IMG = list(DRAGONS)
+        DRG = [x for x in DRG_IMG.split()]
+        A_IMG = list(DRG)
         PIC = random.choice(A_IMG)
         drg_caption = f"**{CUSTOM_ALIVE_TEXT}**\n\n"
         drg_caption += f"**{EMOJI} Database :** `{check_sgnirts}`\n"
