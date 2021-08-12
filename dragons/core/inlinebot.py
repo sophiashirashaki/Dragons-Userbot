@@ -126,18 +126,23 @@ def paginate_help(
         number_of_rows = int(gvarstatus("NO_OF_ROWS_IN_HELP") or 5)
     except ValueError:
         number_of_rows = 5
+
     except TypeError:
         number_of_rows = 5
+
     try:
         number_of_cols = int(gvarstatus("NO_OF_COLUMNS_IN_HELP") or 2)
     except ValueError:
         number_of_cols = 2
+
     except TypeError:
         number_of_cols = 2
+
     HELP_EMOJI = gvarstatus("HELP_EMOJI") or " "
     helpable_plugins = [p for p in loaded_plugins if not p.startswith("_")]
     helpable_plugins = sorted(helpable_plugins)
     if len(HELP_EMOJI) == 2:
+
         if plugins:
             modules = [
                 Button.inline(
@@ -373,7 +378,6 @@ async def inline_handler(event):  # sourcery no-metrics
 
                 else:
                     sandy = f"[{u.first_name}](tg://user?id={u.id})"
-
                 u = int(u.id)
             except Exception:
                 return
@@ -481,7 +485,6 @@ async def inline_handler(event):  # sourcery no-metrics
 
             try:
                 await event.answer([result] if result else None)
-
             except QueryIdInvalidError:
                 await event.answer(
                     [
