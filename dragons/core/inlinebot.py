@@ -146,6 +146,7 @@ def paginate_help(
                 )
                 for x in helpable_plugins
             ]
+
         else:
             modules = [
                 Button.inline(
@@ -154,6 +155,7 @@ def paginate_help(
                 )
                 for x in helpable_plugins
             ]
+
     elif plugins:
         modules = [
             Button.inline(
@@ -162,6 +164,7 @@ def paginate_help(
             )
             for x in helpable_plugins
         ]
+
     else:
         modules = [
             Button.inline(
@@ -348,16 +351,13 @@ async def inline_handler(event):  # sourcery no-metrics
 
                     else:
                         sandy = f"[{u.first_name}](tg://user?id={u.id})"
-
                 except ValueError:
                     # ValueError x Could not find the input entity #
                     sandy = f"[user](tg://user?id={u})"
-
             except ValueError:
                 # if u is username
                 try:
                     u = await event.client.get_entity(user)
-
                 except ValueError:
                     return
                 if u.username:
@@ -449,11 +449,9 @@ async def inline_handler(event):  # sourcery no-metrics
                 photo = types.InputWebDocument(
                     url=photo, size=0, mime_type="image/jpeg", attributes=[]
                 )
-
                 text, msg_entities = await event.client._parse_message_text(
                     caption, "html"
                 )
-
                 result = types.InputBotInlineResult(
                     id=str(uuid4()),
                     type="photo",
@@ -499,11 +497,9 @@ async def inline_handler(event):  # sourcery no-metrics
                 mime_type="image/jpeg",
                 attributes=[],
             )
-
             text, msg_entities = await event.client._parse_message_text(
                 "<b>ARE YOU OLD ENOUGH FOR THIS ?</b>", "html"
             )
-
             result = types.InputBotInlineResult(
                 id=str(uuid4()),
                 type="photo",
@@ -565,16 +561,13 @@ async def inline_handler(event):  # sourcery no-metrics
                 ),
             )
         ]
-
         markup = event.client.build_reply_markup(buttons)
         photo = types.InputWebDocument(
             url=DRGLOGO, size=0, mime_type="image/jpeg", attributes=[]
         )
-
         text, msg_entities = await event.client._parse_message_text(
             "𝗗𝗲𝗽𝗹𝗼𝘆 𝘆𝗼𝘂𝗿 𝗼𝘄𝗻 Dragons-Userbot.", "md"
         )
-
         result = types.InputBotInlineResult(
             id=str(uuid4()),
             type="photo",
