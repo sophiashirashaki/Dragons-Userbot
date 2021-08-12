@@ -254,22 +254,27 @@ async def inline_handler(event):  # sourcery no-metrics
             ]
             ALIVE_PIC = gvarstatus("ALIVE_PIC")
             IALIVE_PIC = gvarstatus("IALIVE_PIC")
+
             if IALIVE_PIC:
                 DRG = [x for x in IALIVE_PIC.split()]
                 PIC = list(DRG)
                 I_IMG = random.choice(PIC)
+
             if not IALIVE_PIC and ALIVE_PIC:
                 DRG = [x for x in ALIVE_PIC.split()]
                 PIC = list(DRG)
                 I_IMG = random.choice(PIC)
+
             elif not IALIVE_PIC:
-                I_IMG = None
-            if I_IMG and I_IMG.endswith((".jpg", ".png")):
+                I_IMG = None or "https://telegra.ph/file/248b4cd5adb27bf33f15c.jpg"
+
+            if I_IMG None or and I_IMG.endswith((".jpg", ".png")):
                 result = builder.photo(
-                    I_IMG,
+                    file=I_IMG,
                     text=query,
                     buttons=buttons,
                 )
+
             elif I_IMG:
                 result = builder.document(
                     I_IMG,
@@ -277,6 +282,7 @@ async def inline_handler(event):  # sourcery no-metrics
                     text=query,
                     buttons=buttons,
                 )
+
             else:
                 result = builder.article(
                     title="Alive Dragons",
@@ -284,6 +290,7 @@ async def inline_handler(event):  # sourcery no-metrics
                     buttons=buttons,
                 )
             await event.answer([result] if result else None)
+
         elif query.startswith("Inline buttons"):
             markdown_note = query[14:]
             prev = 0
@@ -317,6 +324,7 @@ async def inline_handler(event):  # sourcery no-metrics
                 link_preview=False,
             )
             await event.answer([result] if result else None)
+
         elif match:
             query = query[7:]
             user, txct = query.split(" ", 1)
@@ -361,21 +369,35 @@ async def inline_handler(event):  # sourcery no-metrics
                 buttons=buttons,
             )
             await event.answer([result] if result else None)
+
             if jsondata:
                 jsondata.update(newsecret)
                 json.dump(jsondata, open(secret, "w"))
             else:
                 json.dump(newsecret, open(secret, "w"))
         elif string == "help":
+
+            if HELP_PIC:
+                DRG = [x for x in HELP_PIC.split()]
+                PIC = list(DRG)
+                HELP_IMG = random.choice(PIC)
+
+            else:
+                HELP_IMG = None or "https://telegra.ph/file/248b4cd5adb27bf33f15c.jpg"
+
+            if I_IMG None or and I_IMG.endswith((".jpg", "jpeng", ".png")):
+
             _result = main_menu()
-            result = builder.article(
-                title="© Dragons-Userbot Help",
-                description="Help menu for Dragons-Userbot",
+            result = builder.photo(
+                file=HELP_IMG,
+                #title="© Dragons-Userbot Help",
+                #description="Help menu for Dragons-Userbot",
                 text=_result[0],
                 buttons=_result[1],
                 link_preview=False,
             )
             await event.answer([result] if result else None)
+
         elif str_y[0].lower() == "ytdl" and len(str_y) == 2:
             link = get_yt_video_id(str_y[1].strip())
             found_ = True
@@ -470,6 +492,7 @@ async def inline_handler(event):  # sourcery no-metrics
                 ),
             )
             await event.answer([result] if result else None)
+
         elif string == "pmpermit":
             buttons = [
                 Button.inline(text="Show Options.", data="show_pmpermit_options"),
@@ -479,8 +502,10 @@ async def inline_handler(event):  # sourcery no-metrics
                 DRG = [x for x in PM_PIC.split()]
                 PIC = list(DRG)
                 DRG_IMG = random.choice(PIC)
+
             else:
                 DRG_IMG = None
+
             query = gvarstatus("pmpermit_text")
             if DRG_IMG and DRG_IMG.endswith((".jpg", ".jpeg", ".png")):
                 result = builder.photo(
