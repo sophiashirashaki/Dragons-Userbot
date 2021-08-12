@@ -626,7 +626,7 @@ async def on_plug_in_callback_query_handler(event):
     await event.edit(
         "Menu Closed",
         buttons=buttons,
-        file=CLOSE_IMG
+        file=CLOSE_IMG,
     )
 
 @drgub.tgbot.on(CallbackQuery(data=re.compile(b"check")))
