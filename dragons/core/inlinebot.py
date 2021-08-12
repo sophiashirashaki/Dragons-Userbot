@@ -122,8 +122,10 @@ def paginate_help(
     category_plugins=None,
     category_pgno=0,
 ):  # sourcery no-metrics
+
     try:
         number_of_rows = int(gvarstatus("NO_OF_ROWS_IN_HELP") or 5)
+
     except ValueError:
         number_of_rows = 5
 
@@ -132,6 +134,7 @@ def paginate_help(
 
     try:
         number_of_cols = int(gvarstatus("NO_OF_COLUMNS_IN_HELP") or 2)
+
     except ValueError:
         number_of_cols = 2
 
@@ -141,6 +144,7 @@ def paginate_help(
     HELP_EMOJI = gvarstatus("HELP_EMOJI") or " "
     helpable_plugins = [p for p in loaded_plugins if not p.startswith("_")]
     helpable_plugins = sorted(helpable_plugins)
+
     if len(HELP_EMOJI) == 2:
 
         if plugins:
@@ -201,7 +205,9 @@ def paginate_help(
         pairs.append((modules[-2], modules[-1]))
     max_num_pages = math.ceil(len(pairs) / number_of_rows)
     modulo_page = page_number % max_num_pages
+
     if plugins:
+
         if len(pairs) > number_of_rows:
             pairs = pairs[
                 modulo_page * number_of_rows : number_of_rows * (modulo_page + 1)
@@ -354,9 +360,11 @@ async def inline_handler(event):  # sourcery no-metrics
                 jsondata = json.load(open(secret))
             except Exception:
                 jsondata = False
+
             try:
                 # if u is user id
                 u = int(user)
+
                 try:
                     u = await event.client.get_entity(u)
                     if u.username:
