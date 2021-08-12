@@ -264,9 +264,11 @@ async def inline_handler(event):  # sourcery no-metrics
     str_y = query.split(" ", 1)
     string.split()
     query_user_id = event.query.user_id
+
     if query_user_id == Config.OWNER_ID or query_user_id in Config.SUDO_USERS:
         hmm = re.compile("secret (.*) (.*)")
         match = re.findall(hmm, query)
+
         if query.startswith("Dragons-Userbot"):
             buttons = [
                 (
@@ -614,13 +616,13 @@ async def on_plug_in_callback_query_handler(event):
                 PIC = list(DRG)
                 CLOSE_IMG = random.choice(PIC)
 
-            else:
-                CLOSE_IMG = None or "https://telegra.ph/file/248b4cd5adb27bf33f15c.jpg"
+    else:
+        CLOSE_IMG = None or "https://telegra.ph/file/248b4cd5adb27bf33f15c.jpg"
 
     await event.edit(
         "Menu Closed",
-        buttons=buttons,
-        file=CLOSE_IMG
+        file=CLOSE_IMG,
+        buttons=buttons
 )
 
 @drgub.tgbot.on(CallbackQuery(data=re.compile(b"check")))
@@ -655,11 +657,13 @@ async def on_plug_in_callback_query_handler(event):
     mtype = str(event.pattern_match.group(1).decode("UTF-8"))
     category = str(event.pattern_match.group(2).decode("UTF-8"))
     pgno = int(event.pattern_match.group(3).decode("UTF-8"))
+
     if mtype == "plugin":
         buttons = paginate_help(pgno, GRP_INFO[category], category)
         text = f"**Category: **`{category}`\
             \n**Total plugins :** __{len(GRP_INFO[category])}__\
             \n**Total Commands:** __{command_in_category(category)}__"
+
     else:
         category_plugins = str(event.pattern_match.group(4).decode("UTF-8"))
         category_pgno = int(event.pattern_match.group(5).decode("UTF-8"))
@@ -686,8 +690,8 @@ async def on_plug_in_callback_query_handler(event):
                 PIC = list(DRG)
                 HELP_IMG = random.choice(PIC)
 
-            else:
-                HELP_IMG = None or "https://telegra.ph/file/248b4cd5adb27bf33f15c.jpg"
+    else:
+        HELP_IMG = None or "https://telegra.ph/file/248b4cd5adb27bf33f15c.jpg"
 
     await event.edit(_result[0], buttons=_result[1])
 
@@ -700,8 +704,10 @@ async def on_plug_in_callback_query_handler(event):
     category = str(event.pattern_match.group(1).decode("UTF-8"))
     current_page_number = int(event.data_match.group(2).decode("UTF-8"))
     htype = str(event.pattern_match.group(3).decode("UTF-8"))
+
     if htype == "plugin":
         buttons = paginate_help(current_page_number - 1, GRP_INFO[category], category)
+
     else:
         category_plugins = str(event.pattern_match.group(4).decode("UTF-8"))
         category_pgno = int(event.pattern_match.group(5).decode("UTF-8"))
@@ -716,6 +722,7 @@ async def on_plug_in_callback_query_handler(event):
         text = f"**Plugin: **`{category}`\
                 \n**Category: **__{getkey(category)}__\
                 \n**Total Commands:** __{len(PLG_INFO[category])}__"
+
         try:
             return await event.edit(text, buttons=buttons)
         except Exception:
@@ -732,13 +739,17 @@ async def on_plug_in_callback_query_handler(event):
     current_page_number = int(event.data_match.group(2).decode("UTF-8"))
     htype = str(event.pattern_match.group(3).decode("UTF-8"))
     category_plugins = event.pattern_match.group(4)
+
     if category_plugins:
         category_plugins = str(category_plugins.decode("UTF-8"))
     category_pgno = event.pattern_match.group(5)
+
     if category_pgno:
         category_pgno = int(category_pgno.decode("UTF-8"))
+
     if htype == "plugin":
         buttons = paginate_help(current_page_number + 1, GRP_INFO[category], category)
+
     else:
         buttons = paginate_help(
             current_page_number + 1,
