@@ -622,8 +622,8 @@ async def on_plug_in_callback_query_handler(event):
 
     await event.edit(
         "Menu Closed",
-        file=CLOSE_IMG,
-        buttons=buttons
+        buttons=buttons,
+        file=CLOSE_IMG
     )
 
 @drgub.tgbot.on(CallbackQuery(data=re.compile(b"check")))
@@ -658,7 +658,6 @@ async def on_plug_in_callback_query_handler(event):
     mtype = str(event.pattern_match.group(1).decode("UTF-8"))
     category = str(event.pattern_match.group(2).decode("UTF-8"))
     pgno = int(event.pattern_match.group(3).decode("UTF-8"))
-
     if mtype == "plugin":
         buttons = paginate_help(pgno, GRP_INFO[category], category)
         text = f"**Category: **`{category}`\
@@ -694,7 +693,7 @@ async def on_plug_in_callback_query_handler(event):
     else:
         HELP_IMG = None or "https://telegra.ph/file/248b4cd5adb27bf33f15c.jpg"
 
-    await event.edit(_result[0], buttons=_result[1])
+    await event.edit(_result[0], buttons=_result[1], file=HELP_IMG)
 
 
 @drgub.tgbot.on(
