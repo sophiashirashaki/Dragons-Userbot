@@ -268,7 +268,7 @@ async def inline_handler(event):  # sourcery no-metrics
             elif not IALIVE_PIC:
                 I_IMG = None or "https://telegra.ph/file/248b4cd5adb27bf33f15c.jpg"
 
-            if I_IMG None or and I_IMG.endswith((".jpg", ".png")):
+            if I_IMG is not None and I_IMG.endswith((".jpg", ".png")):
                 result = builder.photo(
                     I_IMG,
                     text=query,
@@ -302,17 +302,21 @@ async def inline_handler(event):  # sourcery no-metrics
                 while to_check > 0 and markdown_note[to_check] == "\\":
                     n_escapes += 1
                     to_check -= 1
+
                 if n_escapes % 2 == 0:
                     buttons.append(
                         (match.group(2), match.group(3), bool(match.group(4)))
                     )
                     note_data += markdown_note[prev : match.start(1)]
                     prev = match.end(1)
+
                 elif n_escapes % 2 == 1:
                     note_data += markdown_note[prev:to_check]
                     prev = match.start(1) - 1
+
                 else:
                     break
+
             else:
                 note_data += markdown_note[prev:]
             message_text = note_data.strip()
@@ -341,21 +345,27 @@ async def inline_handler(event):  # sourcery no-metrics
                     u = await event.client.get_entity(u)
                     if u.username:
                         sandy = f"@{u.username}"
+
                     else:
                         sandy = f"[{u.first_name}](tg://user?id={u.id})"
+
                 except ValueError:
-                    # ValueError: Could not find the input entity
+                    # ValueError x Could not find the input entity #
                     sandy = f"[user](tg://user?id={u})"
+
             except ValueError:
                 # if u is username
                 try:
                     u = await event.client.get_entity(user)
+
                 except ValueError:
                     return
                 if u.username:
                     sandy = f"@{u.username}"
+
                 else:
                     sandy = f"[{u.first_name}](tg://user?id={u.id})"
+
                 u = int(u.id)
             except Exception:
                 return
@@ -373,6 +383,7 @@ async def inline_handler(event):  # sourcery no-metrics
             if jsondata:
                 jsondata.update(newsecret)
                 json.dump(jsondata, open(secret, "w"))
+
             else:
                 json.dump(newsecret, open(secret, "w"))
 
@@ -387,7 +398,7 @@ async def inline_handler(event):  # sourcery no-metrics
                 HELP_IMG = None or "https://telegra.ph/file/248b4cd5adb27bf33f15c.jpg"
             _result = main_menu()
 
-            if HELP_IMG None or and HELP_IMG.endswith((".jpg", ".jpeng", ".png")):
+            if HELP_IMG is not None and HELP_IMG.endswith((".jpg", ".jpeng", ".png")):
             result = builder.photo(
                 file=HELP_IMG,
                 # title="© Dragons-Userbot Help",
@@ -404,8 +415,10 @@ async def inline_handler(event):  # sourcery no-metrics
             if link is None:
                 search = VideosSearch(str_y[1].strip(), limit=15)
                 resp = (search.result()).get("result")
+
                 if len(resp) == 0:
                     found_ = False
+
                 else:
                     outdata = await result_formatter(resp)
                     key_ = rand_key()
@@ -426,17 +439,21 @@ async def inline_handler(event):  # sourcery no-metrics
                     ]
                     caption = outdata[1]["message"]
                     photo = await get_ytthumb(outdata[1]["video_id"])
+
             else:
                 caption, buttons = await download_button(link, body=True)
                 photo = await get_ytthumb(link)
+
             if found_:
                 markup = event.client.build_reply_markup(buttons)
                 photo = types.InputWebDocument(
                     url=photo, size=0, mime_type="image/jpeg", attributes=[]
                 )
+
                 text, msg_entities = await event.client._parse_message_text(
                     caption, "html"
                 )
+
                 result = types.InputBotInlineResult(
                     id=str(uuid4()),
                     type="photo",
@@ -448,14 +465,17 @@ async def inline_handler(event):  # sourcery no-metrics
                         reply_markup=markup, message=text, entities=msg_entities
                     ),
                 )
+
             else:
                 result = builder.article(
                     title="Not Found",
                     text=f"No Results found for `{str_y[1]}`",
                     description="INVALID",
                 )
+
             try:
                 await event.answer([result] if result else None)
+
             except QueryIdInvalidError:
                 await event.answer(
                     [
@@ -545,13 +565,16 @@ async def inline_handler(event):  # sourcery no-metrics
                 ),
             )
         ]
+
         markup = event.client.build_reply_markup(buttons)
         photo = types.InputWebDocument(
             url=DRGLOGO, size=0, mime_type="image/jpeg", attributes=[]
         )
+
         text, msg_entities = await event.client._parse_message_text(
             "𝗗𝗲𝗽𝗹𝗼𝘆 𝘆𝗼𝘂𝗿 𝗼𝘄𝗻 Dragons-Userbot.", "md"
         )
+
         result = types.InputBotInlineResult(
             id=str(uuid4()),
             type="photo",
