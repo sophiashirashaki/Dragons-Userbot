@@ -435,6 +435,7 @@ async def inline_handler(event):  # sourcery no-metrics
         elif str_y[0].lower() == "ytdl" and len(str_y) == 2:
             link = get_yt_video_id(str_y[1].strip())
             found_ = True
+
             if link is None:
                 search = VideosSearch(str_y[1].strip(), limit=15)
                 resp = (search.result()).get("result")
@@ -623,7 +624,7 @@ async def on_plug_in_callback_query_handler(event):
         "Menu Closed",
         file=CLOSE_IMG,
         buttons=buttons
-   )
+    )
 
 @drgub.tgbot.on(CallbackQuery(data=re.compile(b"check")))
 async def on_plugin_callback_query_handler(event):
