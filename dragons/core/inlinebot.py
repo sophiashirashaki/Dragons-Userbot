@@ -661,6 +661,7 @@ async def on_plug_in_callback_query_handler(event):
     mtype = str(event.pattern_match.group(1).decode("UTF-8"))
     category = str(event.pattern_match.group(2).decode("UTF-8"))
     pgno = int(event.pattern_match.group(3).decode("UTF-8"))
+
     if mtype == "plugin":
         buttons = paginate_help(pgno, GRP_INFO[category], category)
         text = f"**Category: **`{category}`\
@@ -709,7 +710,6 @@ async def on_plug_in_callback_query_handler(event):
     category = str(event.pattern_match.group(1).decode("UTF-8"))
     current_page_number = int(event.data_match.group(2).decode("UTF-8"))
     htype = str(event.pattern_match.group(3).decode("UTF-8"))
-
     if htype == "plugin":
         buttons = paginate_help(current_page_number - 1, GRP_INFO[category], category)
 
