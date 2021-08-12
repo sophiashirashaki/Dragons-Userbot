@@ -616,9 +616,9 @@ async def on_plug_in_callback_query_handler(event):
     CLOSE_PIC = gvarstatus("CLOSE_PIC")
 
     if CLOSE_PIC:
-                DRG = [x for x in CLOSE_PIC.split()]
-                PIC = list(DRG)
-                CLOSE_IMG = random.choice(PIC)
+        DRG = [x for x in CLOSE_PIC.split()]
+        PIC = list(DRG)
+        CLOSE_IMG = random.choice(PIC)
 
     else:
         CLOSE_IMG = None or "https://telegra.ph/file/248b4cd5adb27bf33f15c.jpg"
@@ -691,9 +691,9 @@ async def on_plug_in_callback_query_handler(event):
     HELP_PIC = gvarstatus("HELP_PIC")
 
     if HELP_PIC:
-                DRG = [x for x in HELP_PIC.split()]
-                PIC = list(DRG)
-                HELP_IMG = random.choice(PIC)
+        DRG = [x for x in HELP_PIC.split()]
+        PIC = list(DRG)
+        HELP_IMG = random.choice(PIC)
 
     else:
         HELP_IMG = None or "https://telegra.ph/file/248b4cd5adb27bf33f15c.jpg"
