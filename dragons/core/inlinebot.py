@@ -356,6 +356,7 @@ async def inline_handler(event):  # sourcery no-metrics
             user, txct = query.split(" ", 1)
             builder = event.builder
             secret = os.path.join("./dragons", "secrets.txt")
+
             try:
                 jsondata = json.load(open(secret))
             except Exception:
@@ -546,7 +547,7 @@ async def inline_handler(event):  # sourcery no-metrics
                 DRG_IMG = None or "https://telegra.ph/file/248b4cd5adb27bf33f15c.jpg"
             query = gvarstatus("pmpermit_text")
 
-            if DRG_IMG None or and DRG_IMG.endswith((".jpg", ".jpeg", ".png")):
+            if DRG_IMG is not None and DRG_IMG.endswith((".jpg", ".jpeg", ".png")):
                 result = builder.photo(
                     DRG_IMG,
                     # title="Alive Dragons",
@@ -608,8 +609,19 @@ async def on_plug_in_callback_query_handler(event):
     buttons = [
         (Button.inline("Open Menu", data="mainmenu"),),
     ]
-    await event.edit("Menu Closed", buttons=buttons)
+    if CLOSE_PIC:
+                DRG = [x for x in CLOSE_PIC.split()]
+                PIC = list(DRG)
+                CLOSE_IMG = random.choice(PIC)
 
+            else:
+                CLOSE_IMG = None or "https://telegra.ph/file/248b4cd5adb27bf33f15c.jpg"
+
+    await event.edit(
+        "Menu Closed",
+        buttons=buttons,
+        file=CLOSE_IMG
+)
 
 @drgub.tgbot.on(CallbackQuery(data=re.compile(b"check")))
 async def on_plugin_callback_query_handler(event):
@@ -669,6 +681,14 @@ async def on_plug_in_callback_query_handler(event):
 @check_owner
 async def on_plug_in_callback_query_handler(event):
     _result = main_menu()
+    if HELP_PIC:
+                DRG = [x for x in HELP_PIC.split()]
+                PIC = list(DRG)
+                HELP_IMG = random.choice(PIC)
+
+            else:
+                HELP_IMG = None or "https://telegra.ph/file/248b4cd5adb27bf33f15c.jpg"
+
     await event.edit(_result[0], buttons=_result[1])
 
 
