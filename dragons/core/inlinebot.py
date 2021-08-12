@@ -270,7 +270,7 @@ async def inline_handler(event):  # sourcery no-metrics
 
             if I_IMG None or and I_IMG.endswith((".jpg", ".png")):
                 result = builder.photo(
-                    file=I_IMG,
+                    I_IMG,
                     text=query,
                     buttons=buttons,
                 )
@@ -375,6 +375,7 @@ async def inline_handler(event):  # sourcery no-metrics
                 json.dump(jsondata, open(secret, "w"))
             else:
                 json.dump(newsecret, open(secret, "w"))
+
         elif string == "help":
 
             if HELP_PIC:
@@ -384,14 +385,13 @@ async def inline_handler(event):  # sourcery no-metrics
 
             else:
                 HELP_IMG = None or "https://telegra.ph/file/248b4cd5adb27bf33f15c.jpg"
-
-            if I_IMG None or and I_IMG.endswith((".jpg", "jpeng", ".png")):
-
             _result = main_menu()
+
+            if HELP_IMG None or and HELP_IMG.endswith((".jpg", ".jpeng", ".png")):
             result = builder.photo(
                 file=HELP_IMG,
-                #title="© Dragons-Userbot Help",
-                #description="Help menu for Dragons-Userbot",
+                # title="© Dragons-Userbot Help",
+                # description="Help menu for Dragons-Userbot",
                 text=_result[0],
                 buttons=_result[1],
                 link_preview=False,
@@ -466,6 +466,7 @@ async def inline_handler(event):  # sourcery no-metrics
                         )
                     ]
                 )
+
         elif string == "age_verification_alert":
             buttons = [
                 Button.inline(text="Yes I'm 18+", data="age_verification_true"),
@@ -478,9 +479,11 @@ async def inline_handler(event):  # sourcery no-metrics
                 mime_type="image/jpeg",
                 attributes=[],
             )
+
             text, msg_entities = await event.client._parse_message_text(
                 "<b>ARE YOU OLD ENOUGH FOR THIS ?</b>", "html"
             )
+
             result = types.InputBotInlineResult(
                 id=str(uuid4()),
                 type="photo",
@@ -498,22 +501,24 @@ async def inline_handler(event):  # sourcery no-metrics
                 Button.inline(text="Show Options.", data="show_pmpermit_options"),
             ]
             PM_PIC = gvarstatus("pmpermit_pic")
+
             if PM_PIC:
                 DRG = [x for x in PM_PIC.split()]
                 PIC = list(DRG)
                 DRG_IMG = random.choice(PIC)
 
             else:
-                DRG_IMG = None
-
+                DRG_IMG = None or "https://telegra.ph/file/248b4cd5adb27bf33f15c.jpg"
             query = gvarstatus("pmpermit_text")
-            if DRG_IMG and DRG_IMG.endswith((".jpg", ".jpeg", ".png")):
+
+            if DRG_IMG None or and DRG_IMG.endswith((".jpg", ".jpeg", ".png")):
                 result = builder.photo(
                     DRG_IMG,
                     # title="Alive Dragons",
                     text=query,
                     buttons=buttons,
                 )
+
             elif DRG_IMG:
                 result = builder.document(
                     DRG_IMG,
@@ -521,6 +526,7 @@ async def inline_handler(event):  # sourcery no-metrics
                     text=query,
                     buttons=buttons,
                 )
+
             else:
                 result = builder.article(
                     title="Alive Dragons",
@@ -528,6 +534,7 @@ async def inline_handler(event):  # sourcery no-metrics
                     buttons=buttons,
                 )
             await event.answer([result] if result else None)
+
     else:
         buttons = [
             (
