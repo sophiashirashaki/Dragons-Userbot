@@ -173,10 +173,13 @@ def paginate_help(
             )
             for x in helpable_plugins
         ]
+
     if number_of_cols == 1:
         pairs = list(zip(modules[::number_of_cols]))
+
     elif number_of_cols == 2:
         pairs = list(zip(modules[::number_of_cols], modules[1::number_of_cols]))
+
     else:
         pairs = list(
             zip(
@@ -185,8 +188,10 @@ def paginate_help(
                 modules[2::number_of_cols],
             )
         )
+
     if len(modules) % number_of_cols == 1:
         pairs.append((modules[-1],))
+
     elif len(modules) % number_of_cols == 2:
         pairs.append((modules[-2], modules[-1]))
     max_num_pages = math.ceil(len(pairs) / number_of_rows)
@@ -202,8 +207,10 @@ def paginate_help(
                     Button.inline("⌦", data=f"{prefix}_next({modulo_page})_plugin"),
                 )
             ]
+
         else:
             pairs = pairs + [(Button.inline("⚙️ Main Menu", data="mainmenu"),)]
+
     elif len(pairs) > number_of_rows:
         pairs = pairs[
             modulo_page * number_of_rows : number_of_rows * (modulo_page + 1)
@@ -223,6 +230,7 @@ def paginate_help(
                 ),
             )
         ]
+
     else:
         pairs = pairs + [
             (
