@@ -411,6 +411,7 @@ async def inline_handler(event):  # sourcery no-metrics
                 json.dump(newsecret, open(secret, "w"))
 
         elif string == "help":
+            HELP_PIC = gvarstatus("HELP_PIC")
 
             if HELP_PIC:
                 DRG = [x for x in HELP_PIC.split()]
@@ -612,6 +613,8 @@ async def on_plug_in_callback_query_handler(event):
     buttons = [
         (Button.inline("Open Menu", data="mainmenu"),),
     ]
+    CLOSE_PIC = gvarstatus("CLOSE_PIC")
+
     if CLOSE_PIC:
                 DRG = [x for x in CLOSE_PIC.split()]
                 PIC = list(DRG)
@@ -685,6 +688,8 @@ async def on_plug_in_callback_query_handler(event):
 @check_owner
 async def on_plug_in_callback_query_handler(event):
     _result = main_menu()
+    HELP_PIC = gvarstatus("HELP_PIC")
+
     if HELP_PIC:
                 DRG = [x for x in HELP_PIC.split()]
                 PIC = list(DRG)
