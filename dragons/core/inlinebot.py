@@ -314,7 +314,7 @@ async def inline_handler(event):  # sourcery no-metrics
             message_text = note_data.strip()
             tl_ib_buttons = ibuild_keyboard(buttons)
             result = builder.article(
-                title="Inline creator",
+                title="Pembuat Inline",
                 text=message_text,
                 buttons=tl_ib_buttons,
                 link_preview=False,
@@ -372,8 +372,8 @@ async def inline_handler(event):  # sourcery no-metrics
         elif string == "help":
             _result = main_menu()
             result = builder.article(
-                title="© Dragons-Userbot Help",
-                description="Help menu for Dragons-Userbot",
+                title="(C) Dragons-Userbot Help",
+                description="Menu Help Dari Dragons-Userbot",
                 text=_result[0],
                 buttons=_result[1],
                 link_preview=False,
@@ -431,9 +431,9 @@ async def inline_handler(event):  # sourcery no-metrics
                 )
             else:
                 result = builder.article(
-                    title="Not Found",
-                    text=f"No Results found for `{str_y[1]}`",
-                    description="INVALID",
+                    title="Tidak Ditemukan",
+                    text=f"Tidak ada Hasil yang ditemukan untuk `{str_y[1]}`",
+                    description="Tidak Valid",
                 )
             try:
                 await event.answer([result] if result else None)
@@ -441,9 +441,9 @@ async def inline_handler(event):  # sourcery no-metrics
                 await event.answer(
                     [
                         builder.article(
-                            title="Not Found",
-                            text=f"No Results found for `{str_y[1]}`",
-                            description="INVALID",
+                            title="Tidak Ditemukan",
+                            text=f"Tidak ada Hasil yang ditemukan untuk `{str_y[1]}`",
+                            description="Tidak Valid",
                         )
                     ]
                 )
@@ -460,12 +460,12 @@ async def inline_handler(event):  # sourcery no-metrics
                 attributes=[],
             )
             text, msg_entities = await event.client._parse_message_text(
-                "<b>ARE YOU OLD ENOUGH FOR THIS ?</b>", "html"
+                "<b>APAKAH ANDA CUKUP TUA UNTUK INI? ?</b>", "html"
             )
             result = types.InputBotInlineResult(
                 id=str(uuid4()),
                 type="photo",
-                title="Age verification",
+                title="usia verifikasi",
                 thumb=photo,
                 content=photo,
                 send_message=types.InputBotInlineMessageMediaAuto(
@@ -475,7 +475,7 @@ async def inline_handler(event):  # sourcery no-metrics
             await event.answer([result] if result else None)
         elif string == "pmpermit":
             buttons = [
-                Button.inline(text="Show Options.", data="show_pmpermit_options"),
+                Button.inline(text="Lihat Options", data="show_pmpermit_options"),
             ]
             PM_PIC = gvarstatus("pmpermit_pic")
             if PM_PIC:
@@ -495,7 +495,7 @@ async def inline_handler(event):  # sourcery no-metrics
             elif DRG_IMG:
                 result = builder.document(
                     DRG_IMG,
-                    title="Alive cat",
+                    title="Alive Dragond",
                     text=query,
                     buttons=buttons,
                 )
@@ -509,9 +509,9 @@ async def inline_handler(event):  # sourcery no-metrics
     else:
         buttons = [
             (
-                Button.url("Source code", "https://github.com/TeamDragons/Dragons-Userbot"),
+                Button.url("Source Code", "https://github.com/TeamDragons/Dragons-Userbot"),
                 Button.url(
-                    "Deploy",
+                    "Deploy Userbot",
                     "https://dashboard.heroku.com/new?button-url=https%3A%2F%2Fgithub.com%2FMr-confused%2Fcatpack&template=https%3A%2F%2Fgithub.com%2FMr-confused%2Fdrgpack",
                 ),
             )
@@ -544,16 +544,17 @@ async def on_plug_in_callback_query_handler(event):
     buttons = [
         (Button.inline("Buka Menu", data="mainmenu"),),
     ]
-    await event.edit("Tutup Menu", buttons=buttons)
+    await event.edit("**Menu Ditutup!**", buttons=buttons)
 
 
 @drgub.tgbot.on(CallbackQuery(data=re.compile(b"check")))
 async def on_plugin_callback_query_handler(event):
-    text = f"𝙿𝚕𝚞𝚐𝚒𝚗𝚜: {len(PLG_INFO)}\
+    text = f"𝙼𝚘𝚍𝚎 𝙸𝚗𝚏𝚘\
+        \𝚗\𝚗𝙿𝚕𝚞𝚐𝚒𝚗𝚜: {len(PLG_INFO)}\
         \n𝙿𝚎𝚛𝚒𝚗𝚝𝚊𝚑 : {len(CMD_INFO)}\
-        \n\n{tr}𝚑𝚎𝚕𝚙 <𝚙𝚕𝚞𝚐𝚒𝚗> : 𝙵𝚘𝚛 𝚜𝚙𝚎𝚌𝚒𝚏𝚒𝚌 𝚙𝚕𝚞𝚐𝚒𝚗 𝚒𝚗𝚏𝚘\
-        \n{tr}𝚑𝚎𝚕𝚙 -𝚌 <𝚙𝚎𝚛𝚒𝚗𝚝𝚊𝚑> : 𝙵𝚘𝚛 𝚊𝚗𝚢 𝚌𝚘𝚖𝚖𝚊𝚗𝚍 𝚒𝚗𝚏𝚘\
-        \n{tr}𝚜 <𝚚𝚞𝚎𝚛𝚢> : 𝚃𝚘 𝚜𝚎𝚊𝚛𝚌𝚑 𝚊𝚗𝚢 𝚙𝚎𝚛𝚒𝚗𝚝𝚊𝚑\
+        \n\n{tr}𝚑𝚎𝚕𝚙 <𝚙𝚕𝚞𝚐𝚒𝚗> : 𝚞𝚗𝚝𝚞𝚔 𝚜𝚙𝚎𝚜𝚒𝚏𝚒𝚔 𝚙𝚕𝚞𝚐𝚒𝚗 𝚒𝚗𝚏𝚘\
+        \n{tr}𝚑𝚎𝚕𝚙 -𝚌 <𝚙𝚎𝚛𝚒𝚗𝚝𝚊𝚑> : 𝚞𝚗𝚝𝚞𝚔 𝚜𝚎𝚝𝚒𝚊𝚙 𝚙𝚎𝚛𝚒𝚗𝚝𝚊𝚑 𝚒𝚗𝚏𝚘\
+        \n{tr}𝚜 <𝚚𝚞𝚎𝚛𝚢> : 𝚖𝚎𝚗𝚌𝚊𝚛𝚒 𝚜𝚎𝚝𝚒𝚊𝚙 𝚙𝚎𝚛𝚒𝚗𝚝𝚊𝚑\
         "
     await event.answer(text, cache_time=0, alert=True)
 
@@ -686,7 +687,7 @@ async def on_plug_in_callback_query_handler(event):
             Button.inline("⚙️ Main Menu", data="mainmenu"),
         )
     ]
-    text = f"**Command :** `{tr}{cmd}`\
+    text = f"**Perintah :** `{tr}{cmd}`\
         \n**Plugin :** `{category}`\
         \n**Category :** `{category_plugins}`\
         \n\n**✘ Penjelasan :**\n{CMD_INFO[cmd][0]}"
