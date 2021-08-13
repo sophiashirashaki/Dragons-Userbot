@@ -46,7 +46,7 @@ async def amireallyalive(event):
         A_IMG = list(DRG)
         PIC = random.choice(A_IMG)
         drg_caption = f"=============================\n"
-        drg_caption += f"__**{CUSTOM_ALIVE_TEXT}**__\n"
+        drg_caption += f" __**{CUSTOM_ALIVE_TEXT}**__\n"
         drg_caption += f"============================\n"
         drg_caption += f"**{EMOJI} Database :** `{check_sgnirts}`\n"
         drg_caption += f"**{EMOJI} Telethon version :** `{version.__version__}\n`"
@@ -67,14 +67,14 @@ async def amireallyalive(event):
         await edit_or_reply(
             event,
             f"=============================\n"
-            f"__**{CUSTOM_ALIVE_TEXT}**__\n\n"
+            f" __**{CUSTOM_ALIVE_TEXT}**__\n"
             f"=============================\n"
             f"**{EMOJI} Database :** `{check_sgnirts}`\n"
             f"**{EMOJI} Telethon Version :** `{version.__version__}\n`"
             f"**{EMOJI} Dragons-userbot Version :** `{drgversion}`\n"
             f"**{EMOJI} Python Version :** `{python_version()}\n`"
             f"**{EMOJI} Uptime :** `{uptime}\n`"
-            f"**{EMOJI} Master:** {mention}\n"
+            f"**{EMOJI} Master :** {mention}\n"
             f"=============================\n",
         )
 
