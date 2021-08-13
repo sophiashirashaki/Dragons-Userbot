@@ -30,7 +30,7 @@ from .logger import logging
 LOGS = logging.getLogger(__name__)
 
 BTN_URL_REGEX = re.compile(r"(\[([^\[]+?)\]\<buttonurl:(?:/{0,2})(.+?)(:same)?\>)")
-DRGLOGO = "https://telegra.ph/file/248b4cd5adb27bf33f15c.jpg"
+DRGLOGO = "https://telegra.ph/file/8e51f2c57e5e27d09f907.jpg"
 tr = Config.COMMAND_HAND_LER
 
 
@@ -53,8 +53,11 @@ def ibuild_keyboard(buttons):
 
 
 def main_menu():
-    text = f"Dagons-Userbot 𝗛𝗲𝗹𝗽𝗲𝗿\
-        \n𝗣𝗿𝗼𝘃𝗶𝗱𝗲𝗱 𝗯𝘆 {mention}"
+    text = f"Repository | Userbot\
+        \n\nTelegram Userbot Dengan Telethon\
+        \n\n**Bahasa :** Python\
+        \n**Branch :** __Dragons-Userbot__\
+        \n**Master by** {mention}"
     buttons = [
         (
             Button.inline(
@@ -98,7 +101,7 @@ def main_menu():
                 data=f"extra_menu",
             ),
             Button.inline(
-                f"🔒 Close Menu",
+                f"🔒 Tutup Menu",
                 data=f"close",
             ),
         ),
@@ -211,7 +214,7 @@ def paginate_help(
                     data=f"{prefix}_prev({modulo_page})_command_{category_plugins}_{category_pgno}",
                 ),
                 Button.inline(
-                    "⬅️ Back ",
+                    "⬅️ Kembali ",
                     data=f"back_plugin_{category_plugins}_{category_pgno}",
                 ),
                 Button.inline(
@@ -224,7 +227,7 @@ def paginate_help(
         pairs = pairs + [
             (
                 Button.inline(
-                    "⬅️ Back ",
+                    "⬅️ Kembali ",
                     data=f"back_plugin_{category_plugins}_{category_pgno}",
                 ),
             )
@@ -249,7 +252,7 @@ async def inline_handler(event):  # sourcery no-metrics
             buttons = [
                 (
                     Button.inline("Stats", data="stats"),
-                    Button.url("Repo", "https://github.com/TeamDragons/Dragons-Userbot"),
+                    Button.url("Repository", "https://github.com/TeamDragons/Dragons-Userbot"),
                 )
             ]
             ALIVE_PIC = gvarstatus("ALIVE_PIC")
@@ -264,7 +267,7 @@ async def inline_handler(event):  # sourcery no-metrics
                 I_IMG = random.choice(PIC)
             elif not IALIVE_PIC:
                 I_IMG = None
-            if I_IMG None and I_IMG.endswith((".jpg", ".png")):
+            if I_IMG and I_IMG.endswith((".jpg", ".png")):
                 result = builder.photo(
                     I_IMG,
                     text=query,
@@ -336,7 +339,7 @@ async def inline_handler(event):  # sourcery no-metrics
                     else:
                         sandy = f"[{u.first_name}](tg://user?id={u.id})"
                 except ValueError:
-                    # ValueError x Could not find the input entity #
+                    # ValueError: Could not find the input entity
                     sandy = f"[user](tg://user?id={u})"
             except ValueError:
                 # if u is username
@@ -353,10 +356,11 @@ async def inline_handler(event):  # sourcery no-metrics
                 return
             timestamp = int(time.time() * 2)
             newsecret = {str(timestamp): {"userid": u, "text": txct}}
-            buttons = [Button.inline("show message 🔐", data=f"secret_{timestamp}")]
+
+            buttons = [Button.inline("Lihat Pesan 🔐", data=f"secret_{timestamp}")]
             result = builder.article(
                 title="secret message",
-                text=f"🔒 A whisper message to {sandy}, Only he/she can open it.",
+                text=f"🔒 Pesan sembunyi untuk {sandy}, Hanya dia yang bisa membukanya",
                 buttons=buttons,
             )
             await event.answer([result] if result else None)
@@ -366,17 +370,8 @@ async def inline_handler(event):  # sourcery no-metrics
             else:
                 json.dump(newsecret, open(secret, "w"))
         elif string == "help":
-            HELP_PIC = gvarstatus("HELP_PIC")
-            if HELP_PIC:
-                DRG = [x for x in HELP_PIC.split()]
-                PIC = list(DRG)
-                HELP_IMG = random.choice(PIC)
-            else:
-                HELP_IMG = None 
             _result = main_menu()
-            if HELP_IMG None and HELP_IMG.endswith((".jpg", ".jpeng", ".png")):
-            result = builder.photo(
-                HELP_IMG,
+            result = builder.article(
                 title="© Dragons-Userbot Help",
                 description="Help menu for Dragons-Userbot",
                 text=_result[0],
@@ -427,7 +422,7 @@ async def inline_handler(event):  # sourcery no-metrics
                     id=str(uuid4()),
                     type="photo",
                     title=link,
-                    description="⬇️ Click to Download",
+                    description="⬇️ Klik Untuk Download",
                     thumb=photo,
                     content=photo,
                     send_message=types.InputBotInlineMessageMediaAuto(
@@ -454,8 +449,8 @@ async def inline_handler(event):  # sourcery no-metrics
                 )
         elif string == "age_verification_alert":
             buttons = [
-                Button.inline(text="Yes I'm 18+", data="age_verification_true"),
-                Button.inline(text="No I'm Not", data="age_verification_false"),
+                Button.inline(text="Saya 18+", data="age_verification_true"),
+                Button.inline(text="Tidak 18+", data="age_verification_false"),
             ]
             markup = event.client.build_reply_markup(buttons)
             photo = types.InputWebDocument(
@@ -488,9 +483,9 @@ async def inline_handler(event):  # sourcery no-metrics
                 PIC = list(DRG)
                 DRG_IMG = random.choice(PIC)
             else:
-                DRG_IMG = None 
+                DRG_IMG = None
             query = gvarstatus("pmpermit_text")
-            if DRG_IMG None and DRG_IMG.endswith((".jpg", ".jpeg", ".png")):
+            if DRG_IMG and DRG_IMG.endswith((".jpg", ".jpeg", ".png")):
                 result = builder.photo(
                     DRG_IMG,
                     # title="Alive Dragons",
@@ -500,7 +495,7 @@ async def inline_handler(event):  # sourcery no-metrics
             elif DRG_IMG:
                 result = builder.document(
                     DRG_IMG,
-                    title="Alive Dragons",
+                    title="Alive cat",
                     text=query,
                     buttons=buttons,
                 )
@@ -517,7 +512,7 @@ async def inline_handler(event):  # sourcery no-metrics
                 Button.url("Source code", "https://github.com/TeamDragons/Dragons-Userbot"),
                 Button.url(
                     "Deploy",
-                    "https://dashboard.heroku.com/new?button-url=https%3A%2F%2Fgithub.com%2FMr-confused%2Fdrgpack&template=https%3A%2F%2Fgithub.com%2FMr-confused%2Fdrgpack",
+                    "https://dashboard.heroku.com/new?button-url=https%3A%2F%2Fgithub.com%2FMr-confused%2Fcatpack&template=https%3A%2F%2Fgithub.com%2FMr-confused%2Fdrgpack",
                 ),
             )
         ]
@@ -526,13 +521,13 @@ async def inline_handler(event):  # sourcery no-metrics
             url=DRGLOGO, size=0, mime_type="image/jpeg", attributes=[]
         )
         text, msg_entities = await event.client._parse_message_text(
-            "𝗗𝗲𝗽𝗹𝗼𝘆 𝘆𝗼𝘂𝗿 𝗼𝘄𝗻 Dragons-Userbot.", "md"
+            "Anda dapat deploy __Dragons-Userbot__ Anda Sendiri\n\n**Klik Button Url Dibawah Ini**", "md"
         )
         result = types.InputBotInlineResult(
             id=str(uuid4()),
             type="photo",
             title="Dragons-Userbot",
-            description="Deploy yourself",
+            description="Deploy Sendiri",
             url="https://github.com/TeamDragons/Dragons-Userbot",
             thumb=photo,
             content=photo,
@@ -547,24 +542,18 @@ async def inline_handler(event):  # sourcery no-metrics
 @check_owner
 async def on_plug_in_callback_query_handler(event):
     buttons = [
-        (Button.inline("Open Menu", data="mainmenu"),),
+        (Button.inline("Buka Menu", data="mainmenu"),),
     ]
-    CLOSE_PIC = gvarstatus("CLOSE_PIC")
-    if CLOSE_PIC:
-        DRG = [x for x in CLOSE_PIC.split()]
-        PIC = list(DRG)
-        CLOSE_IMG = random.choice(PIC)
-    else:
-        CLOSE_IMG = None
-    await event.edit("Menu Closed", buttons=buttons, CLOSE_IMG)
+    await event.edit("Tutup Menu", buttons=buttons)
+
 
 @drgub.tgbot.on(CallbackQuery(data=re.compile(b"check")))
 async def on_plugin_callback_query_handler(event):
     text = f"𝙿𝚕𝚞𝚐𝚒𝚗𝚜: {len(PLG_INFO)}\
-        \n𝙲𝚘𝚖𝚖𝚊𝚗𝚍𝚜: {len(CMD_INFO)}\
-        \n\n{tr}𝚑𝚎𝚕𝚙 <𝚙𝚕𝚞𝚐𝚒𝚗> : 𝙵𝚘𝚛 𝚜𝚙𝚎𝚌𝚒𝚏𝚒𝚌 𝚙𝚕𝚞𝚐𝚒𝚗 𝚒𝚗𝚏𝚘.\
-        \n{tr}𝚑𝚎𝚕𝚙 -𝚌 <𝚌𝚘𝚖𝚖𝚊𝚗𝚍> : 𝙵𝚘𝚛 𝚊𝚗𝚢 𝚌𝚘𝚖𝚖𝚊𝚗𝚍 𝚒𝚗𝚏𝚘.\
-        \n{tr}𝚜 <𝚚𝚞𝚎𝚛𝚢> : 𝚃𝚘 𝚜𝚎𝚊𝚛𝚌𝚑 𝚊𝚗𝚢 𝚌𝚘𝚖𝚖𝚊𝚗𝚍𝚜.\
+        \n𝙿𝚎𝚛𝚒𝚗𝚝𝚊𝚑 : {len(CMD_INFO)}\
+        \n\n{tr}𝚑𝚎𝚕𝚙 <𝚙𝚕𝚞𝚐𝚒𝚗> : 𝙵𝚘𝚛 𝚜𝚙𝚎𝚌𝚒𝚏𝚒𝚌 𝚙𝚕𝚞𝚐𝚒𝚗 𝚒𝚗𝚏𝚘\
+        \n{tr}𝚑𝚎𝚕𝚙 -𝚌 <𝚙𝚎𝚛𝚒𝚗𝚝𝚊𝚑> : 𝙵𝚘𝚛 𝚊𝚗𝚢 𝚌𝚘𝚖𝚖𝚊𝚗𝚍 𝚒𝚗𝚏𝚘\
+        \n{tr}𝚜 <𝚚𝚞𝚎𝚛𝚢> : 𝚃𝚘 𝚜𝚎𝚊𝚛𝚌𝚑 𝚊𝚗𝚢 𝚙𝚎𝚛𝚒𝚗𝚝𝚊𝚑\
         "
     await event.answer(text, cache_time=0, alert=True)
 
@@ -574,9 +563,9 @@ async def on_plugin_callback_query_handler(event):
 async def on_plug_in_callback_query_handler(event):
     category = str(event.pattern_match.group(1).decode("UTF-8"))
     buttons = paginate_help(0, GRP_INFO[category], category)
-    text = f"**Category: **{category}\
+    text = f"**Category : **{category}\
         \n**Total plugins :** {len(GRP_INFO[category])}\
-        \n**Total Commands:** {command_in_category(category)}"
+        \n**Total Perintah :** {command_in_category(category)}"
     await event.edit(text, buttons=buttons)
 
 
@@ -592,9 +581,9 @@ async def on_plug_in_callback_query_handler(event):
     pgno = int(event.pattern_match.group(3).decode("UTF-8"))
     if mtype == "plugin":
         buttons = paginate_help(pgno, GRP_INFO[category], category)
-        text = f"**Category: **`{category}`\
+        text = f"**Category : **`{category}`\
             \n**Total plugins :** __{len(GRP_INFO[category])}__\
-            \n**Total Commands:** __{command_in_category(category)}__"
+            \n**Total Perintah :** __{command_in_category(category)}__"
     else:
         category_plugins = str(event.pattern_match.group(4).decode("UTF-8"))
         category_pgno = int(event.pattern_match.group(5).decode("UTF-8"))
@@ -606,9 +595,9 @@ async def on_plug_in_callback_query_handler(event):
             category_plugins=category_plugins,
             category_pgno=category_pgno,
         )
-        text = f"**Plugin: **`{category}`\
-                \n**Category: **__{getkey(category)}__\
-                \n**Total Commands:** __{len(PLG_INFO[category])}__"
+        text = f"**Plugin : **`{category}`\
+                \n**Category : **__{getkey(category)}__\
+                \n**Total Perintah :** __{len(PLG_INFO[category])}__"
     await event.edit(text, buttons=buttons)
 
 
@@ -616,14 +605,7 @@ async def on_plug_in_callback_query_handler(event):
 @check_owner
 async def on_plug_in_callback_query_handler(event):
     _result = main_menu()
-    HELP_PIC = gvarstatus("HELP_PIC")
-    if HELP_PIC:
-        DRG = [x for x in HELP_PIC.split()]
-        PIC = list(DRG)
-        HELP_IMG = random.choice(PIC)
-    else:
-        HELP_IMG = None
-    await event.edit(_result[0], buttons=_result[1], HELP_IMG)
+    await event.edit(_result[0], buttons=_result[1])
 
 
 @drgub.tgbot.on(
@@ -647,9 +629,9 @@ async def on_plug_in_callback_query_handler(event):
             category_plugins=category_plugins,
             category_pgno=category_pgno,
         )
-        text = f"**Plugin: **`{category}`\
-                \n**Category: **__{getkey(category)}__\
-                \n**Total Commands:** __{len(PLG_INFO[category])}__"
+        text = f"**Plugin : **`{category}`\
+                \n**Category : **__{getkey(category)}__\
+                \n**Total Perintah :** __{len(PLG_INFO[category])}__"
         try:
             return await event.edit(text, buttons=buttons)
         except Exception:
@@ -698,7 +680,7 @@ async def on_plug_in_callback_query_handler(event):
     buttons = [
         (
             Button.inline(
-                "⬅️ Back ",
+                "⬅️ Kembali ",
                 data=f"back_command_{category}_{pgno}_{category_plugins}_{category_pgno}",
             ),
             Button.inline("⚙️ Main Menu", data="mainmenu"),
@@ -707,5 +689,5 @@ async def on_plug_in_callback_query_handler(event):
     text = f"**Command :** `{tr}{cmd}`\
         \n**Plugin :** `{category}`\
         \n**Category :** `{category_plugins}`\
-        \n\n**✘ Intro :**\n{CMD_INFO[cmd][0]}"
+        \n\n**✘ Penjelasan :**\n{CMD_INFO[cmd][0]}"
     await event.edit(text, buttons=buttons)
