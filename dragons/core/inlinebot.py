@@ -550,7 +550,7 @@ async def on_plug_in_callback_query_handler(event):
 @drgub.tgbot.on(CallbackQuery(data=re.compile(b"check")))
 async def on_plugin_callback_query_handler(event):
     text = f"𝙼𝚘𝚍𝚎 𝙸𝚗𝚏𝚘 𝙼𝚎𝚗𝚞 𝙷𝚎𝚕𝚙\
-        \𝚗𝙿𝚕𝚞𝚐𝚒𝚗𝚜: {len(PLG_INFO)}\
+        \n\n𝙿𝚕𝚞𝚐𝚒𝚗𝚜 : {len(PLG_INFO)}\
         \n𝙿𝚎𝚛𝚒𝚗𝚝𝚊𝚑 : {len(CMD_INFO)}\
         \n\n{tr}𝚑𝚎𝚕𝚙 <𝚙𝚕𝚞𝚐𝚒𝚗> : 𝚞𝚗𝚝𝚞𝚔 𝚜𝚙𝚎𝚜𝚒𝚏𝚒𝚔 𝚙𝚕𝚞𝚐𝚒𝚗 𝚒𝚗𝚏𝚘\
         \n{tr}𝚑𝚎𝚕𝚙 -𝚌 <𝚙𝚎𝚛𝚒𝚗𝚝𝚊𝚑> : 𝚞𝚗𝚝𝚞𝚔 𝚜𝚎𝚝𝚒𝚊𝚙 𝚙𝚎𝚛𝚒𝚗𝚝𝚊𝚑 𝚒𝚗𝚏𝚘\
