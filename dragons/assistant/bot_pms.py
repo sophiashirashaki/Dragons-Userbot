@@ -343,7 +343,7 @@ async def send_flood_alert(user_) -> None:
         except Exception as e:
             if BOTLOG:
                 await drgub.tgbot.send_message(
-                    BOTLOG_CHATID, f"**Error:**\nWhile updating flood count\n`{str(e)}`"
+                    BOTLOG_CHATID, f"**Error :**\nSaat memperbarui menghitung flood\n`{str(e)}`"
                 )
         flood_count = FloodConfig.ALERT[user_.id]["count"]
     else:
@@ -363,8 +363,8 @@ async def send_flood_alert(user_) -> None:
         if flood_count >= FloodConfig.AUTOBAN:
             if user_.id in Config.SUDO_USERS:
                 sudo_spam = (
-                    f"**Sudo User** {_format.mentionuser(user_.first_name , user_.id)}:\n  ID: {user_.id}\n\n"
-                    "Membanjiri bot Anda? !, Check `.help delsudo` untuk menghapus pengguna dari Sudo."
+                    f"**Sudo User** {_format.mentionuser(user_.first_name , user_.id)}:\n  ID : {user_.id}\n\n"
+                    "Membanjiri bot Anda? !, Check `.help delsudo` untuk menghapus pengguna dari Sudo"
                 )
                 if BOTLOG:
                     await drgub.tgbot.send_message(BOTLOG_CHATID, sudo_spam)
@@ -418,7 +418,7 @@ async def bot_pm_ban_cb(c_q: CallbackQuery):
     else:
         await c_q.answer(f"Banning UserID -> {user_id} ...", alert=False)
         await ban_user_from_bot(user, "Spamming Bot")
-        await c_q.edit(f"✅ **Berhasil Banned**\nPengguna ID : {user_id}")
+        await c_q.edit(f"✅ **Berhasil Banned**\n**Pengguna ID :** {user_id}")
 
 
 def time_now() -> Union[float, int]:
