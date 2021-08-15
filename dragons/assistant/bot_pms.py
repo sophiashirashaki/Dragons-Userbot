@@ -48,12 +48,12 @@ async def check_bot_started_users(user, event):
     check = get_starter_details(user.id)
     if check is None:
         start_date = str(datetime.now().strftime("%B %d, %Y"))
-        notification = f"👤 {_format.mentionuser(user.first_name , user.id)} has started me.\
+        notification = f"**User :** {_format.mentionuser(user.first_name , user.id)} has started me.\
                 \n**ID: **`{user.id}`\
                 \n**Name: **{get_display_name(user)}"
     else:
         start_date = check.date
-        notification = f"👤 {_format.mentionuser(user.first_name , user.id)} has restarted me.\
+        notification = f"**User :** {_format.mentionuser(user.first_name , user.id)} has restarted me.\
                 \n**ID: **`{user.id}`\
                 \n**Name: **{get_display_name(user)}"
     try:
@@ -103,22 +103,22 @@ async def bot_start(event):
                 my_mention=my_mention,
             )
         else:
-            start_msg = f"Hey! 👤{mention},\
-                        \nI am {my_mention}'s assistant bot.\
-                        \nYou can contact to my master from here.\
-                        \n\nPowered by [Dragons-userbot](https://t.me/Kinguserbotsupport)"
+            start_msg = f"**Haii**!{mention},\
+                        \n**Saya Adalah** {my_mention} **Assistant Bot**.\
+                        \n__Anda dapat menghubungi master saya dari sini__.\
+                        \n\n**Powered by** [Dragons-Userbot](https://t.me/Kinguserbotsupport)"
         buttons = [
             (
-                Button.url("Repo", "https://github.com/TeamDragons/Dragons-userbot"),
+                Button.url("ʀᴇᴘᴏ", "https://github.com/TeamDragons/Dragons-userbot"),
                 Button.url(
-                    "Deploy",
+                    "ᴅᴇᴘʟᴏʏ",
                     "https://dashboard.heroku.com/new?button-url=https%3A%2F%2Fgithub.com%2FMr-confused%2Fdrgpack&template=https%3A%2F%2Fgithub.com%2FMr-confused%2Fdrgpack",
                 ),
             )
         ]
     else:
         start_msg = "Hey Master!\
-            \nHow can i help you ?"
+            \nApa yang bisa saya bantu ?"
         buttons = None
     try:
         await event.client.send_message(
@@ -132,7 +132,7 @@ async def bot_start(event):
         if BOTLOG:
             await event.client.send_message(
                 BOTLOG_CHATID,
-                f"**Error**\nThere was a error while user starting your bot.\
+                f"**Error**\nTerjadi kesalahan saat pengguna memulai bot Anda.\
                 \n`{str(e)}`",
             )
     else:
@@ -153,7 +153,7 @@ async def bot_pms(event):  # sourcery no-metrics
             if BOTLOG:
                 await event.client.send_message(
                     BOTLOG_CHATID,
-                    f"**Error**\nWhile storing messages details in database\n`{str(e)}`",
+                    f"**Error**\nSaat menyimpan detail pesan di database\n`{str(e)}`",
                 )
     else:
         if event.text.startswith("/"):
@@ -192,7 +192,7 @@ async def bot_pms(event):  # sourcery no-metrics
                 if BOTLOG:
                     await event.client.send_message(
                         BOTLOG_CHATID,
-                        f"**Error**\nWhile storing messages details in database\n`{str(e)}`",
+                        f"**Error**\nSaat menyimpan detail pesan di database\n`{str(e)}`",
                     )
 
 
@@ -213,7 +213,7 @@ async def bot_pms_edit(event):  # sourcery no-metrics
         if reply_msg:
             await event.client.send_message(
                 Config.OWNER_ID,
-                f"⬆️ **This message was edited by the user** {_format.mentionuser(get_display_name(chat) , chat.id)} as :",
+                f"⬆️ **Pesan ini telah diedit oleh pengguna** {_format.mentionuser(get_display_name(chat) , chat.id)} as :",
                 reply_to=reply_msg,
             )
             msg = await event.forward_to(Config.OWNER_ID)
@@ -224,7 +224,7 @@ async def bot_pms_edit(event):  # sourcery no-metrics
                 if BOTLOG:
                     await event.client.send_message(
                         BOTLOG_CHATID,
-                        f"**Error**\nWhile storing messages details in database\n`{str(e)}`",
+                        f"**Error**\nSaat menyimpan detail pesan di database\n`{str(e)}`",
                     )
     else:
         reply_to = await reply_id(event)
@@ -282,7 +282,7 @@ async def handler(event):
                         return
                     await event.client.send_message(
                         Config.OWNER_ID,
-                        f"⬆️ **This message was deleted by the user** {_format.mentionuser(user_name , user_id)}.",
+                        f"⬆️ **Pesan ini telah diedit oleh pengguna** {_format.mentionuser(user_name , user_id)}.",
                         reply_to=reply_msg,
                     )
             except Exception as e:
@@ -296,16 +296,16 @@ async def handler(event):
 async def bot_start(event):
     reply_to = await reply_id(event)
     if not reply_to:
-        return await event.reply("Reply to a message to get message info")
+        return await event.reply("Balas pesan untuk mendapatkan info pesan")
     info_msg = await event.client.send_message(
         event.chat_id,
-        "`🔎 Searching for this user in my database ...`",
+        "`🔎 Mencari pengguna ini di database saya ...`",
         reply_to=reply_to,
     )
     users = get_user_id(reply_to)
     if users is None:
         return await info_msg.edit(
-            "**ERROR:** \n`Sorry !, Can't Find this user in my database :(`"
+            "**ERROR:** \n`Maaf!, Tidak Dapat Menemukan pengguna ini di database saya :(`"
         )
     for usr in users:
         user_id = int(usr.chat_id)
@@ -313,9 +313,9 @@ async def bot_start(event):
         break
     if user_id is None:
         return await info_msg.edit(
-            "**ERROR:** \n`Sorry !, Can't Find this user in my database :(`"
+            "**ERROR:** \n`Maaf!, Tidak Dapat Menemukan pengguna ini di database saya :(`"
         )
-    uinfo = f"This message was sent by 👤 {_format.mentionuser(user_name , user_id)}\
+    uinfo = f"Pesan Ini Dikirim Oleh 👤 {_format.mentionuser(user_name , user_id)}\
             \n**First Name:** {user_name}\
             \n**User ID:** `{user_id}`"
     await info_msg.edit(uinfo)
@@ -355,8 +355,8 @@ async def send_flood_alert(user_) -> None:
         f"  ID: `{user_.id}`\n"
         f"  Name: {get_display_name(user_)}\n"
         f"  👤 User: {_format.mentionuser(get_display_name(user_), user_.id)}"
-        f"\n\n**Is spamming your bot !** ->  [ Flood rate ({flood_count}) ]\n"
-        "__Quick Action__: Ignored from bot for a while."
+        f"\n\n**Apakah mengirim spam ke bot Anda? !** ->  [ Flood rate ({flood_count}) ]\n"
+        "__Quick Action__: Diabaikan dari bot untuk sementara waktu."
     )
 
     if found:
@@ -364,7 +364,7 @@ async def send_flood_alert(user_) -> None:
             if user_.id in Config.SUDO_USERS:
                 sudo_spam = (
                     f"**Sudo User** {_format.mentionuser(user_.first_name , user_.id)}:\n  ID: {user_.id}\n\n"
-                    "Is Flooding your bot !, Check `.help delsudo` to remove the user from Sudo."
+                    "Membanjiri bot Anda? !, Check `.help delsudo` untuk menghapus pengguna dari Sudo."
                 )
                 if BOTLOG:
                     await drgub.tgbot.send_message(BOTLOG_CHATID, sudo_spam)
@@ -398,7 +398,7 @@ async def send_flood_alert(user_) -> None:
             chat = await drgub.tgbot.get_entity(BOTLOG_CHATID)
             await drgub.tgbot.send_message(
                 Config.OWNER_ID,
-                f"⚠️  **[Bot Flood Warning !](https://t.me/c/{chat.id}/{fa_msg.id})**",
+                f"⚠️  **[Peringatan Banjir Bot !](https://t.me/c/{chat.id}/{fa_msg.id})**",
             )
         except UserIsBlockedError:
             if BOTLOG:
