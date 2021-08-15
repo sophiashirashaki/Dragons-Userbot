@@ -48,14 +48,14 @@ async def check_bot_started_users(user, event):
     check = get_starter_details(user.id)
     if check is None:
         start_date = str(datetime.now().strftime("%B %d, %Y"))
-        notification = f"**User :** {_format.mentionuser(user.first_name , user.id)} has started me.\
-                \n**ID: **`{user.id}`\
-                \n**Name: **{get_display_name(user)}"
+        notification = f"**Pengguna :** {_format.mentionuser(user.first_name , user.id)} has started me.\
+                \n**ID : **`{user.id}`\
+                \n**Nama : **{get_display_name(user)}"
     else:
         start_date = check.date
-        notification = f"**User :** {_format.mentionuser(user.first_name , user.id)} has restarted me.\
-                \n**ID: **`{user.id}`\
-                \n**Name: **{get_display_name(user)}"
+        notification = f"**Pengguna :** {_format.mentionuser(user.first_name , user.id)} has restarted me.\
+                \n**ID : **`{user.id}`\
+                \n**Nama : **{get_display_name(user)}"
     try:
         add_starter_to_db(user.id, get_display_name(user), start_date, user.username)
     except Exception as e:
@@ -109,9 +109,9 @@ async def bot_start(event):
                         \n\n**Powered by** [Dragons-Userbot](https://t.me/Kinguserbotsupport)"
         buttons = [
             (
-                Button.url("ʀᴇᴘᴏ", "https://github.com/TeamDragons/Dragons-userbot"),
+                Button.url("Repository", "https://github.com/TeamDragons/Dragons-userbot"),
                 Button.url(
-                    "ᴅᴇᴘʟᴏʏ",
+                    "Deploy",
                     "https://dashboard.heroku.com/new?button-url=https%3A%2F%2Fgithub.com%2FMr-confused%2Fdrgpack&template=https%3A%2F%2Fgithub.com%2FMr-confused%2Fdrgpack",
                 ),
             )
@@ -180,9 +180,9 @@ async def bot_pms(event):  # sourcery no-metrics
                         user_id, event.text, reply_to=reply_msg
                     )
             except UserIsBlockedError:
-                return await event.reply("𝗧𝗵𝗶𝘀 𝗯𝗼𝘁 𝘄𝗮𝘀 𝗯𝗹𝗼𝗰𝗸𝗲𝗱 𝗯𝘆 𝘁𝗵𝗲 𝘂𝘀𝗲𝗿. ❌")
+                return await event.reply("**Bot Anda Telah Di Blokir Oleh Pengguna** ❌")
             except Exception as e:
-                return await event.reply(f"**Error:**\n`{str(e)}`")
+                return await event.reply(f"**Error :**\n`{str(e)}`")
             try:
                 add_user_to_db(
                     reply_to, user_name, user_id, reply_msg, event.id, msg.id
@@ -305,7 +305,7 @@ async def bot_start(event):
     users = get_user_id(reply_to)
     if users is None:
         return await info_msg.edit(
-            "**ERROR:** \n`Maaf!, Tidak Dapat Menemukan pengguna ini di database saya :(`"
+            "**ERROR :** \n`Maaf!, Tidak Dapat Menemukan pengguna ini di database saya :(`"
         )
     for usr in users:
         user_id = int(usr.chat_id)
@@ -313,11 +313,11 @@ async def bot_start(event):
         break
     if user_id is None:
         return await info_msg.edit(
-            "**ERROR:** \n`Maaf!, Tidak Dapat Menemukan pengguna ini di database saya :(`"
+            "**ERROR :** \n`Maaf!, Tidak Dapat Menemukan pengguna ini di database saya :(`"
         )
     uinfo = f"Pesan Ini Dikirim Oleh 👤 {_format.mentionuser(user_name , user_id)}\
-            \n**First Name:** {user_name}\
-            \n**User ID:** `{user_id}`"
+            \n**Nama Depan :** {user_name}\
+            \n**ID Pengguna :** `{user_id}`"
     await info_msg.edit(uinfo)
 
 
@@ -352,11 +352,11 @@ async def send_flood_alert(user_) -> None:
     flood_msg = (
         r"⚠️ **#Flood_Warning**"
         "\n\n"
-        f"  ID: `{user_.id}`\n"
-        f"  Name: {get_display_name(user_)}\n"
-        f"  👤 User: {_format.mentionuser(get_display_name(user_), user_.id)}"
+        f"  ID : `{user_.id}`\n"
+        f"  Nama : {get_display_name(user_)}\n"
+        f"  👤 Pengguna : {_format.mentionuser(get_display_name(user_), user_.id)}"
         f"\n\n**Apakah mengirim spam ke bot Anda? !** ->  [ Flood rate ({flood_count}) ]\n"
-        "__Quick Action__: Diabaikan dari bot untuk sementara waktu."
+        "__Quick Action :__ Diabaikan dari bot untuk sementara waktu."
     )
 
     if found:
@@ -371,7 +371,7 @@ async def send_flood_alert(user_) -> None:
             else:
                 await ban_user_from_bot(
                     user_,
-                    f"Automated Ban for Flooding bot [exceeded flood rate of ({FloodConfig.AUTOBAN})]",
+                    f"Larangan Otomatis untuk Flooding bot [melebihi flood peringkat dari ({FloodConfig.AUTOBAN})]",
                 )
                 FloodConfig.USERS[user_.id].clear()
                 FloodConfig.ALERT[user_.id].clear()
@@ -402,7 +402,7 @@ async def send_flood_alert(user_) -> None:
             )
         except UserIsBlockedError:
             if BOTLOG:
-                await drgub.tgbot.send_message(BOTLOG_CHATID, "**Unblock your bot !**")
+                await drgub.tgbot.send_message(BOTLOG_CHATID, "**Kamu Unblokir Bot !**")
     if FloodConfig.ALERT[user_.id].get("fa_id") is None and fa_msg:
         FloodConfig.ALERT[user_.id]["fa_id"] = fa_msg.id
 
@@ -414,11 +414,11 @@ async def bot_pm_ban_cb(c_q: CallbackQuery):
     try:
         user = await drgub.get_entity(user_id)
     except Exception as e:
-        await c_q.answer(f"Error:\n{str(e)}")
+        await c_q.answer(f"Error :\n{str(e)}")
     else:
         await c_q.answer(f"Banning UserID -> {user_id} ...", alert=False)
         await ban_user_from_bot(user, "Spamming Bot")
-        await c_q.edit(f"✅ **Successfully Banned**  User ID: {user_id}")
+        await c_q.edit(f"✅ **Berhasil Banned**\nPengguna ID : {user_id}")
 
 
 def time_now() -> Union[float, int]:
@@ -455,8 +455,8 @@ async def settings_toggle(c_q: CallbackQuery):
     if gvarstatus("bot_antif") is None:
         return await c_q.answer(f"Bot Antiflood was already disabled.", alert=False)
     delgvar("bot_antif")
-    await c_q.answer(f"Bot Antiflood disabled.", alert=False)
-    await c_q.edit("BOT_ANTIFLOOD is now disabled !")
+    await c_q.answer(f"Bot Antiflood dinonaktifkan", alert=False)
+    await c_q.edit("BOT_ANTIFLOOD sekarang dinonaktifkan !")
 
 
 @drgub.bot_cmd(incoming=True, func=lambda e: e.is_private)
