@@ -97,7 +97,7 @@ temp = """=============================
         "header": "Untuk memeriksa status hidup bot melalui mode inline",
         "options": "Untuk menampilkan media dalam hal ini perintah kamu butuh `set ALIVE_PIC` dengan tautan media, dapatkan ini dengan membalas media dengan `{tr}tgm`",
         "usage": [
-            "{tr}alive",
+            "{tr}ialive",
         ],
     },
 )
