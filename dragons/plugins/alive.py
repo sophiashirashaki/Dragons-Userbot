@@ -52,7 +52,7 @@ async def amireallyalive(event):
         mention=mention,
         uptime=uptime,
         telever=version.__version__,
-        catver=catversion,
+        drgver=drgversion,
         pyver=python_version(),
         dbhealth=check_sgnirts,
         ping=ms,
@@ -77,14 +77,14 @@ async def amireallyalive(event):
         )
 
 temp ="""=============================
-{ALIVE_TEXT} \n"
-=============================\n"
-**{EMOJI} Database :** `{check_sgnirts}`\n"
-**{EMOJI} Telethon Version :** `{version.__version__}\n`"
-**{EMOJI} Dragons-userbot Version :** `{drgversion}`\n"
-**{EMOJI} Python Version :** `{python_version()}`\n"
-**{EMOJI} Uptime :** `{uptime}\n`"
-**{EMOJI} Master :** {mention}\n"
+{ALIVE_TEXT} 
+=============================
+**{EMOJI} Database :** `{dbhealth}`
+**{EMOJI} Telethon Version :** `{telever}`
+**{EMOJI} Dragons-userbot Version :** `{drgver}`
+**{EMOJI} Python Version :** `{pyver}`
+**{EMOJI} Uptime :** `{uptime}`
+**{EMOJI} Master :** {mention}
 ============================="""
 
 @drgub.drg_cmd(
