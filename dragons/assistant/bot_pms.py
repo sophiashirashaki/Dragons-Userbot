@@ -137,8 +137,7 @@ async def bot_start(event):
         if BOTLOG:
             await event.client.send_message(
                 BOTLOG_CHATID,
-                f"**Error**\nTerjadi kesalahan saat pengguna memulai bot Anda.\
-                \n`{str(e)}`",
+                f"**Error**\nTerjadi kesalahan saat pengguna memulai bot Anda\n`{e}`",
             )
     else:
         await check_bot_started_users(chat, event)
@@ -158,7 +157,7 @@ async def bot_pms(event):  # sourcery no-metrics
             if BOTLOG:
                 await event.client.send_message(
                     BOTLOG_CHATID,
-                    f"**Error**\nSaat menyimpan detail pesan di database\n`{str(e)}`",
+                    f"**Error**\nSaat menyimpan detail pesan di database\n`{e}`",
                 )
     else:
         if event.text.startswith("/"):
@@ -187,7 +186,7 @@ async def bot_pms(event):  # sourcery no-metrics
             except UserIsBlockedError:
                 return await event.reply("**Bot Anda Telah Di Blokir Oleh Pengguna** ❌")
             except Exception as e:
-                return await event.reply(f"**Error :**\n`{str(e)}`")
+                return await event.reply(f"**Error :**\n`{e}`")
             try:
                 add_user_to_db(
                     reply_to, user_name, user_id, reply_msg, event.id, msg.id
@@ -197,7 +196,7 @@ async def bot_pms(event):  # sourcery no-metrics
                 if BOTLOG:
                     await event.client.send_message(
                         BOTLOG_CHATID,
-                        f"**Error**\nSaat menyimpan detail pesan di database\n`{str(e)}`",
+                        f"**Error**\nSaat menyimpan detail pesan di database\n`{e}`",
                     )
 
 
@@ -229,7 +228,7 @@ async def bot_pms_edit(event):  # sourcery no-metrics
                 if BOTLOG:
                     await event.client.send_message(
                         BOTLOG_CHATID,
-                        f"**Error**\nSaat menyimpan detail pesan di database\n`{str(e)}`",
+                        f"**Error**\nSaat menyimpan detail pesan di database\n`{e}`",
                     )
     else:
         reply_to = await reply_id(event)
@@ -348,7 +347,7 @@ async def send_flood_alert(user_) -> None:
         except Exception as e:
             if BOTLOG:
                 await drgub.tgbot.send_message(
-                    BOTLOG_CHATID, f"**Error :**\nSaat memperbarui menghitung flood\n`{str(e)}`"
+                    BOTLOG_CHATID, f"**Error :**\nSaat memperbarui menghitung flood\n`{e}`"
                 )
         flood_count = FloodConfig.ALERT[user_.id]["count"]
     else:
@@ -419,9 +418,9 @@ async def bot_pm_ban_cb(c_q: CallbackQuery):
     try:
         user = await drgub.get_entity(user_id)
     except Exception as e:
-        await c_q.answer(f"Error :\n{str(e)}")
+        await c_q.answer(f"Error :\n{e}")
     else:
-        await c_q.answer(f"Banning UserID -> {user_id} ...", alert=False)
+        await c_q.answer(f"Blokir ID Pengguna -> {user_id} ...", alert=False)
         await ban_user_from_bot(user, "Spamming Bot")
         await c_q.edit(f"✅ **Berhasil Banned**\n**Pengguna ID :** {user_id}")
 
