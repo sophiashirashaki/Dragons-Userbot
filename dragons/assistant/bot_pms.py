@@ -103,10 +103,10 @@ async def bot_start(event):
                 my_mention=my_mention,
             )
         else:
-            start_msg = f"**Haii**!{mention},\
-                        \n**Saya Adalah** {my_mention} **Assistant Bot**.\
-                        \n__Anda dapat menghubungi master saya dari sini__.\
-                        \n\n**Powered by** [Dragons-Userbot](https://t.me/Kinguserbotsupport)"
+            start_msg = f"**Hai**! {mention}\
+                        \n**Saya Adalah** {my_mention} **Assistant Bot**\
+                        \n__Anda dapat menghubungi master saya dari sini__\
+                        \n\n**Powered by** [Dragons-Userbot](https://t.me/KingUserbotSupport)"
         buttons = [
             (
                 Button.url("Repository", "https://github.com/TeamDragons/Dragons-userbot"),
@@ -117,9 +117,14 @@ async def bot_start(event):
             )
         ]
     else:
-        start_msg = "Hey Master!\
-            \nApa yang bisa saya bantu ?"
-        buttons = None
+        start_msg = "Hai Master!\
+            \nApa yang bisa saya bantu master ?\
+            \n\n__**Jika Anda Memiliki Masalah Atau Keluhan Sama Bot Ini Tinggal Klik Bantuan Dibawah Ini**__"
+        buttons = [
+            (
+                Button.url("Bantuan", "https://t.me/KingUserbotSupport"),
+            )
+       ]
     try:
         await event.client.send_message(
             chat.id,
@@ -364,7 +369,7 @@ async def send_flood_alert(user_) -> None:
             if user_.id in Config.SUDO_USERS:
                 sudo_spam = (
                     f"**Sudo User** {_format.mentionuser(user_.first_name , user_.id)}:\n  ID : {user_.id}\n\n"
-                    "Membanjiri bot Anda? !, Check `.help delsudo` untuk menghapus pengguna dari Sudo"
+                    "Membanjiri bot Anda? ! , Check `.help delsudo` untuk menghapus pengguna dari Sudo"
                 )
                 if BOTLOG:
                     await drgub.tgbot.send_message(BOTLOG_CHATID, sudo_spam)
@@ -453,7 +458,7 @@ def is_flood(uid: int) -> Optional[bool]:
 @check_owner
 async def settings_toggle(c_q: CallbackQuery):
     if gvarstatus("bot_antif") is None:
-        return await c_q.answer(f"Bot Antiflood was already disabled.", alert=False)
+        return await c_q.answer(f"Bot Antiflood sudah dinonaktifkan", alert=False)
     delgvar("bot_antif")
     await c_q.answer(f"Bot Antiflood dinonaktifkan", alert=False)
     await c_q.edit("BOT_ANTIFLOOD sekarang dinonaktifkan !")
