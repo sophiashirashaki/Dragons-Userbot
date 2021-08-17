@@ -44,7 +44,7 @@ async def amireallyalive(event):
     _, check_sgnirts = check_data_base_heal_th()
     EMOJI = gvarstatus("ALIVE_EMOJI") or "✥"
     ALIVE_TEXT = gvarstatus("ALIVE_TEXT") or "**✮ DRAGONS-USERBOT ✮**"
-    CAT_IMG = gvarstatus("ALIVE_PIC")
+    DRG_IMG = gvarstatus("ALIVE_PIC")
     drg_caption = gvarstatus("ALIVE_TEMPLATE") or temp
     caption = drg_caption.format(
         ALIVE_TEXT=ALIVE_TEXT,
@@ -77,7 +77,7 @@ async def amireallyalive(event):
         )
 
 
-temp ="""=============================
+temp = """=============================
 {ALIVE_TEXT} 
 =============================
 **{EMOJI} Database :** `{dbhealth}`
@@ -104,7 +104,7 @@ async def amireallyalive(event):
     "Semacam menampilkan detail bot oleh bot inline Anda"
     reply_to_id = await reply_id(event)
     EMOJI = gvarstatus("ALIVE_EMOJI") or "✥"
-    ALIVE_TEXT = gvarstatus("CUSTOM_ALIVE") or "Dragons-Userbot Aktif"
+    ALIVE_TEXT = gvarstatus("ALIVE_TEXT") or "Dragons-Userbot Aktif"
     drg_caption = f"**{ALIVE_TEXT}**\n\n"
     drg_caption += f"**{EMOJI} Telethon version :** `{version.__version__}\n`"
     drg_caption += f"**{EMOJI} Dragons-userbot Version :** `{drgversion}`\n"
