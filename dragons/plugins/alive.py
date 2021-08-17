@@ -36,28 +36,34 @@ plugin_category = "utils"
 async def amireallyalive(event):
     "Semacam menampilkan detail bot"
     reply_to_id = await reply_id(event)
-    await edit_or_reply(event, "`Userbot Aktif...`")
     uptime = await get_readable_time((time.time() - StartTime))
+    start = datetime.now()
+    await edit_or_reply(event, "Userbot Aktif...")
+    end = datetime.now()
+    ms = (end - start).microseconds / 1000
     _, check_sgnirts = check_data_base_heal_th()
     EMOJI = gvarstatus("ALIVE_EMOJI") or "✥"
-    CUSTOM_ALIVE_TEXT = gvarstatus("ALIVE_TEXT") or "✮ DRAGONS-USERBOT ✮"
-    DRG_IMG = gvarstatus("ALIVE_PIC")
+    ALIVE_TEXT = gvarstatus("ALIVE_TEXT") or "**✮ DRAGONS-USERBOT ✮**"
+    CAT_IMG = gvarstatus("ALIVE_PIC")
+    cat_caption = gvarstatus("ALIVE_TEMPLATE") or temp
+    caption = cat_caption.format(
+        ALIVE_TEXT=ALIVE_TEXT,
+        EMOJI=EMOJI,
+        mention=mention,
+        uptime=uptime,
+        telever=version.__version__,
+        catver=catversion,
+        pyver=python_version(),
+        dbhealth=check_sgnirts,
+        ping=ms,
+    )
     if DRG_IMG:
         DRG = [x for x in DRG_IMG.split()]
-        A_IMG = list(DRG)
-        PIC = random.choice(A_IMG)
-        drg_caption = f"=============================\n"
-        drg_caption += f" __**{CUSTOM_ALIVE_TEXT}**__\n"
-        drg_caption += f"============================\n"
-        drg_caption += f"**{EMOJI} Database :** `{check_sgnirts}`\n"
-        drg_caption += f"**{EMOJI} Telethon version :** `{version.__version__}\n`"
-        drg_caption += f"**{EMOJI} Dragons-userbot Version :** `{drgversion}`\n"
-        drg_caption += f"**{EMOJI} Python Version :** `{python_version()}\n`"
-        drg_caption += f"**{EMOJI} Uptime :** `{uptime}\n`"
-        drg_caption += f"**{EMOJI} Master :** {mention}\n"
-        drg_caption += f"============================\n"
+        PIC = random.choice(DRG)
         try:
-            await event.client.send_file(event.chat_id, PIC, caption=drg_caption, reply_to=reply_to_id)
+            await event.client.send_file(
+                event.chat_id, PIC, caption=caption, reply_to=reply_to_id
+            )
             await event.delete()
         except (WebpageMediaEmptyError, MediaEmptyError, WebpageCurlFailedError):
             return await edit_or_reply(
@@ -67,18 +73,19 @@ async def amireallyalive(event):
     else:
         await edit_or_reply(
             event,
-            f"=============================\n"
-            f" __**{CUSTOM_ALIVE_TEXT}**__\n"
-            f"=============================\n"
-            f"**{EMOJI} Database :** `{check_sgnirts}`\n"
-            f"**{EMOJI} Telethon Version :** `{version.__version__}\n`"
-            f"**{EMOJI} Dragons-userbot Version :** `{drgversion}`\n"
-            f"**{EMOJI} Python Version :** `{python_version()}\n`"
-            f"**{EMOJI} Uptime :** `{uptime}\n`"
-            f"**{EMOJI} Master :** {mention}\n"
-            f"=============================\n",
+            caption,
         )
 
+temp ="""=============================
+{ALIVE_TEXT} \n"
+=============================\n"
+**{EMOJI} Database :** `{check_sgnirts}`\n"
+**{EMOJI} Telethon Version :** `{version.__version__}\n`"
+**{EMOJI} Dragons-userbot Version :** `{drgversion}`\n"
+**{EMOJI} Python Version :** `{python_version()}`\n"
+**{EMOJI} Uptime :** `{uptime}\n`"
+**{EMOJI} Master :** {mention}\n"
+============================="""
 
 @drgub.drg_cmd(
     pattern="ialive$",
