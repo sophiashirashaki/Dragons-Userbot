@@ -36,9 +36,10 @@ plugin_category = "utils"
 async def amireallyalive(event):
     "Semacam menampilkan detail bot"
     reply_to_id = await reply_id(event)
+    await edit_or_reply(event, "`Userbot Aktif...`")
     uptime = await get_readable_time((time.time() - StartTime))
     _, check_sgnirts = check_data_base_heal_th()
-    EMOJI = gvarstatus("ALIVE_EMOJI") or "  ✥ "
+    EMOJI = gvarstatus("ALIVE_EMOJI") or "✥"
     CUSTOM_ALIVE_TEXT = gvarstatus("ALIVE_TEXT") or "✮ DRAGONS-USERBOT ✮"
     DRG_IMG = gvarstatus("ALIVE_PIC")
     if DRG_IMG:
@@ -94,7 +95,8 @@ async def amireallyalive(event):
     "Semacam menampilkan detail bot oleh bot inline Anda"
     reply_to_id = await reply_id(event)
     EMOJI = gvarstatus("ALIVE_EMOJI") or "✥"
-    drg_caption = f"**Dragons-userbot sedang berjalan**\n"
+    ALIVE_TEXT = gvarstatus("CUSTOM_ALIVE") or "Dragons-Userbot Aktif"
+    drg_caption = f"**{ALIVE_TEXT}**\n\n"
     drg_caption += f"**{EMOJI} Telethon version :** `{version.__version__}\n`"
     drg_caption += f"**{EMOJI} Dragons-userbot Version :** `{drgversion}`\n"
     drg_caption += f"**{EMOJI} Python Version :** `{python_version()}\n`"
