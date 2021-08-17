@@ -16,6 +16,7 @@ extractor = URLExtract()
 vlist = [
     "ALIVE_PIC",
     "ALIVE_EMOJI",
+    "ALIVE_TEMPLATE",
     "ALIVE_TEXT",
     "ALLOW_NSFW",
     "HELP_EMOJI",
