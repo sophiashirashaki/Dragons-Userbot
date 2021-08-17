@@ -45,8 +45,8 @@ async def amireallyalive(event):
     EMOJI = gvarstatus("ALIVE_EMOJI") or "✥"
     ALIVE_TEXT = gvarstatus("ALIVE_TEXT") or "**✮ DRAGONS-USERBOT ✮**"
     CAT_IMG = gvarstatus("ALIVE_PIC")
-    cat_caption = gvarstatus("ALIVE_TEMPLATE") or temp
-    caption = cat_caption.format(
+    drg_caption = gvarstatus("ALIVE_TEMPLATE") or temp
+    caption = drg_caption.format(
         ALIVE_TEXT=ALIVE_TEXT,
         EMOJI=EMOJI,
         mention=mention,
