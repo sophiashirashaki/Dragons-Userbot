@@ -33,7 +33,7 @@ def check_data_base_heal_th():
         # to check database we will execute raw query
         SESSION.execute("SELECT 1")
     except Exception as e:
-        output = f"❌ {str(e)}"
+        output = f"❌ (e)"
         is_database_working = False
     else:
         output = "Functioning"
@@ -83,7 +83,7 @@ async def drgalive(StartTime):
         dyno = f"{AppHours}h {AppMinutes}m/{hours}h {minutes}m"
     except Exception as e:
         dyno = e
-    return f"Dragons-Userbo Stats\
+    return f"Dragons-Userbot Stats\
                  \n\nDatabase : {check_sgnirts}\
                   \nSudo : {sudo}\
                   \nUptime : {uptime}\
