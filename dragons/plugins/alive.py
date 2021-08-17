@@ -76,6 +76,7 @@ async def amireallyalive(event):
             caption,
         )
 
+
 temp ="""=============================
 {ALIVE_TEXT} 
 =============================
@@ -86,6 +87,7 @@ temp ="""=============================
 **{EMOJI} Uptime :** `{uptime}`
 **{EMOJI} Master :** {mention}
 ============================="""
+
 
 @drgub.drg_cmd(
     pattern="ialive$",
