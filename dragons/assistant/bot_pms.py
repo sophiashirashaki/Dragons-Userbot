@@ -48,12 +48,12 @@ async def check_bot_started_users(user, event):
     check = get_starter_details(user.id)
     if check is None:
         start_date = str(datetime.now().strftime("%B %d, %Y"))
-        notification = f"**Pengguna :** {_format.mentionuser(user.first_name , user.id)} has started me.\
+        notification = f"**Pengguna :** {_format.mentionuser(user.first_name , user.id)} Sudah Memulai Bot Master\
                 \n**ID : **`{user.id}`\
                 \n**Nama : **{get_display_name(user)}"
     else:
         start_date = check.date
-        notification = f"**Pengguna :** {_format.mentionuser(user.first_name , user.id)} has restarted me.\
+        notification = f"**Pengguna :** {_format.mentionuser(user.first_name , user.id)} Sudah Memulai Bot Master\
                 \n**ID : **`{user.id}`\
                 \n**Nama : **{get_display_name(user)}"
     try:
@@ -65,7 +65,7 @@ async def check_bot_started_users(user, event):
 
 
 @drgub.bot_cmd(
-    pattern=f"^/start({botusername})?([\s]+)?$",
+    pattern="^/start({botusername})?([\s]+)?$",
     incoming=True,
     func=lambda e: e.is_private,
 )
@@ -157,7 +157,7 @@ async def bot_pms(event):  # sourcery no-metrics
             if BOTLOG:
                 await event.client.send_message(
                     BOTLOG_CHATID,
-                    f"**Error**\nSaat menyimpan detail pesan di database\n`{e}`",
+                    f"**Error**\nSaat menyimpan detail pesan di database\n`{str(e)}`",
                 )
     else:
         if event.text.startswith("/"):
