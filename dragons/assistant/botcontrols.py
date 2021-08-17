@@ -38,20 +38,20 @@ async def bot_help(event):
 **Note : **__Perintah ini hanya berfungsi di bot ini__ {botusername}
 
 • **Cmd : **/uinfo <reply to user message>
-• **Info : **__Anda telah memperhatikan bahwa stiker/emoji yang diteruskan tidak memiliki tag penerusan sehingga Anda dapat mengidentifikasi pengguna yang mengirim pesan tersebut dengan cmd ini.__
-• **Note : **__Ini berfungsi untuk semua pesan yang diteruskan. bahkan untuk pengguna yang izin meneruskan pesan tidak ada.__
+• **Info : **__Anda telah memperhatikan bahwa stiker/emoji yang diteruskan tidak memiliki tag penerusan sehingga Anda dapat mengidentifikasi pengguna yang mengirim pesan tersebut dengan cmd ini__
+• **Note : **__Ini berfungsi untuk semua pesan yang diteruskan. bahkan untuk pengguna yang izin meneruskan pesan tidak ada__
 
 • **Cmd : **/ban <reason> or /ban <username/userid> <reason>
-• **Info : **__Balas pesan pengguna dengan alasan sehingga dia akan diberi tahu saat Anda diblokir dari bot dan pesannya tidak akan diteruskan ke Anda lebih lanjut.__
-• **Note : **__Alasan adalah keharusan. tanpa alasan itu tidak akan berhasil.__
+• **Info : **__Balas pesan pengguna dengan alasan sehingga dia akan diberi tahu saat Anda diblokir dari bot dan pesannya tidak akan diteruskan ke Anda lebih lanjut__
+• **Note : **__Alasan adalah keharusan, tanpa alasan itu tidak akan berhasil__
 
 • **Cmd : **/unban <reason(optional)> or /unban <username/userid>
-• **Info : **__Balas pesan pengguna atau berikan nama pengguna/id pengguna untuk membatalkan larangan dari bot.__
+• **Info : **__Balas pesan pengguna atau berikan nama pengguna/id pengguna untuk membatalkan larangan dari bot__
 • **Note : **__Untuk memeriksa daftar pengguna yang diblokir gunakan__ `{cmhd}bblist`.
 
 • **Cmd : **/broadcast
-• **Info : **__Balas pesan untuk disiarkan ke setiap pengguna yang memulai bot Anda. Untuk mendapatkan daftar pengguna gunakan__ `{cmhd}bot_users`.
-• **Note : **__jika pengguna menghentikan/memblokir bot maka dia akan dihapus dari database Anda yaitu dia akan dihapus dari daftar bot_starters.__
+• **Info : **__Balas pesan untuk disiarkan ke setiap pengguna yang memulai bot Anda. Untuk mendapatkan daftar pengguna gunakan__ `{cmhd}bot_users`
+• **Note : **__jika pengguna menghentikan/memblokir bot maka dia akan dihapus dari database Anda yaitu dia akan dihapus dari daftar bot_starters__
 """
     )
 
@@ -63,21 +63,21 @@ async def bot_help(event):
 async def bot_broadcast(event):
     replied = await event.get_reply_message()
     if not replied:
-        return await event.reply("Membalas pesan untuk Broadcasting First!")
+        return await event.reply("Membalas pesan untuk Siaran Pertama!")
     start_ = datetime.now()
-    br_cast = await replied.reply("Broadcasting ...")
+    br_cast = await replied.reply("Menyiarkan ...")
     blocked_users = []
     count = 0
     bot_users_count = len(get_all_starters())
     if bot_users_count == 0:
-        return await event.reply("`Belum ada yang memulai bot Anda.`")
+        return await event.reply("`Belum ada yang memulai bot Anda`")
     users = get_all_starters()
     if users is None:
-        return await event.reply("`Terjadi kesalahan saat mengambil daftar pengguna.`")
+        return await event.reply("`Terjadi kesalahan saat mengambil daftar pengguna`")
     for user in users:
         try:
             await event.client.send_message(
-                int(user.user_id), "🔊 Anda Menerima **New** Broadcast."
+                int(user.user_id), "🔊 Anda Menerima Pesan **Baru** Menyiarkan"
             )
             await event.client.send_message(int(user.user_id), replied)
             await asyncio.sleep(0.8)
@@ -89,30 +89,30 @@ async def bot_broadcast(event):
             LOGS.error(str(e))
             if BOTLOG:
                 await event.client.send_message(
-                    BOTLOG_CHATID, f"**Error while broadcasting**\n`{str(e)}`"
+                    BOTLOG_CHATID, f"**Error saat siaran**\n`{str(e)}`"
                 )
         else:
             count += 1
             if count % 5 == 0:
                 try:
                     prog_ = (
-                        "🔊 Broadcasting ...\n\n"
+                        "🔊 Menyiarkan ...\n\n"
                         + progress_str(
                             total=bot_users_count,
                             current=count + len(blocked_users),
                         )
-                        + f"\n\n• ✔️ **Success** :  `{count}`\n"
-                        + f"• ✖️ **Failed** :  `{len(blocked_users)}`"
+                        + f"\n\n• ✔️ **Berhasil** :  `{count}`\n"
+                        + f"• ✖️ **Gagal** :  `{len(blocked_users)}`"
                     )
                     await br_cast.edit(prog_)
                 except FloodWaitError as e:
                     await asyncio.sleep(e.seconds)
     end_ = datetime.now()
-    b_info = f"🔊  Berhasil menyiarkan pesan ke ➜  <b>{count} users.</b>"
+    b_info = f"🔊  Berhasil menyiarkan pesan ke ➜  <b>{count} Pengguna</b>"
     if len(blocked_users) != 0:
-        b_info += f"\n🚫  <b>{len(blocked_users)} users</b> memblokir bot Anda baru-baru ini, jadi telah dihapus."
+        b_info += f"\n🚫  <b>{len(blocked_users)} Pengguna</b> memblokir bot Anda baru-baru ini, jadi telah dihapus"
     b_info += (
-        f"\n⏳  <code>Process took: {time_formatter((end_ - start_).seconds)}</code>."
+        f"\n⏳  <code>Proses mengambil : {time_formatter((end_ - start_).seconds)}</code>"
     )
     await br_cast.edit(b_info, parse_mode="html")
 
@@ -121,19 +121,19 @@ async def bot_broadcast(event):
     pattern=f"bot_users$",
     command=("bot_users", plugin_category),
     info={
-        "header": "Untuk mendapatkan daftar pengguna yang memulai bot.",
+        "header": "Untuk mendapatkan daftar pengguna yang memulai bot",
         "description": "Untuk mendapatkan daftar lengkap pengguna yang memulai bot Anda",
         "usage": "{tr}bot_users",
     },
 )
 async def ban_starters(event):
-    "To get list of users who started bot."
+    "Untuk mendapatkan daftar pengguna yang memulai bot"
     ulist = get_all_starters()
     if len(ulist) == 0:
-        return await edit_delete(event, "`Belum ada yang memulai bot Anda.`")
-    msg = "**Daftar pengguna yang memulai bot Anda adalah:\n\n**"
+        return await edit_delete(event, "`Belum ada yang memulai bot Anda`")
+    msg = "**Daftar pengguna yang memulai bot Anda adalah :\n\n**"
     for user in ulist:
-        msg += f"• 👤 {_format.mentionuser(user.first_name , user.user_id)}\n**ID:** `{user.user_id}`\n**UserName:** @{user.username}\n**Date: **__{user.date}__\n\n"
+        msg += f"• 👤 {_format.mentionuser(user.first_name , user.user_id)}\n**ID Pengguna :** `{user.user_id}`\n**Username :** @{user.username}\n**Tanggal : **__{user.date}__\n\n"
     await edit_or_reply(event, msg)
 
 
@@ -146,27 +146,27 @@ async def ban_botpms(event):
     reply_to = await reply_id(event)
     if not user_id:
         return await event.client.send_message(
-            event.chat_id, "`Saya tidak dapat menemukan pengguna untuk dilarang`", reply_to=reply_to
+            event.chat_id, "`Saya tidak dapat menemukan pengguna untuk diblokir`", reply_to=reply_to
         )
     if not reason:
         return await event.client.send_message(
-            event.chat_id, "`Untuk melarang pengguna memberikan alasan terlebih dahulu`", reply_to=reply_to
+            event.chat_id, "`Untuk memblokir pengguna memberikan alasan terlebih dahulu`", reply_to=reply_to
         )
     try:
         user = await event.client.get_entity(user_id)
         user_id = user.id
     except Exception as e:
-        return await event.reply(f"**Error:**\n`{str(e)}`")
+        return await event.reply(f"**Error :**\n`{str(e)}`")
     if user_id == Config.OWNER_ID:
-        return await event.reply("Aku tidak bisa melarangmu master")
+        return await event.reply("Aku tidak bisa memblokirmu master")
     check = check_is_black_list(user.id)
     if check:
         return await event.client.send_message(
             event.chat_id,
-            f"#Already_banned\
-            \nUser already exists in my Banned Users list.\
-            \n**Reason For Bot BAN:** `{check.reason}`\
-            \n**Date:** `{check.date}`.",
+            f"#Sudah_Diblokir\
+            \nPengguna sudah ada di daftar Pengguna yang Diblokir\
+            \n**Alasan untuk diblokir :** `{check.reason}`\
+            \n**Tanggal :** `{check.date}`.",
         )
     msg = await ban_user_from_bot(user, reason, reply_to)
     await event.reply(msg)
@@ -187,13 +187,13 @@ async def ban_botpms(event):
         user = await event.client.get_entity(user_id)
         user_id = user.id
     except Exception as e:
-        return await event.reply(f"**Error:**\n`{str(e)}`")
+        return await event.reply(f"**Error :**\n`{str(e)}`")
     check = check_is_black_list(user.id)
     if not check:
         return await event.client.send_message(
             event.chat_id,
-            f"#User_Not_Banned\
-            \n👤 {_format.mentionuser(user.first_name , user.id)} doesn't exist in my Banned Users list.",
+            f"#Pengguna_Tidak_Diblokir\
+            \n• 👤 {_format.mentionuser(user.first_name , user.id)} tidak ada di daftar Pengguna Diblokir saya",
         )
     msg = await unban_user_from_bot(user, reason, reply_to)
     await event.reply(msg)
@@ -203,19 +203,19 @@ async def ban_botpms(event):
     pattern=f"bblist$",
     command=("bblist", plugin_category),
     info={
-        "header": "Untuk mendapatkan daftar pengguna yang dilarang di bot.",
-        "description": "Untuk mendapatkan daftar pengguna yang dilarang di bot.",
+        "header": "Untuk mendapatkan daftar pengguna yang diblokir di bot",
+        "description": "Untuk mendapatkan daftar pengguna yang diblokir di bot",
         "usage": "{tr}bblist",
     },
 )
 async def ban_starters(event):
-    "To get list of users who are banned in bot."
+    "Untuk mendapatkan daftar pengguna yang diblokir di bot"
     ulist = get_all_bl_users()
     if len(ulist) == 0:
-        return await edit_delete(event, "`Belum ada yang dilarang di bot Anda.`")
-    msg = "**Daftar pengguna yang dilarang di bot Anda adalah :\n\n**"
+        return await edit_delete(event, "`Belum ada yang diblokir di bot Anda`")
+    msg = "**Daftar pengguna yang diblokir di bot Anda adalah :\n\n**"
     for user in ulist:
-        msg += f"• 👤 {_format.mentionuser(user.first_name , user.chat_id)}\n**ID:** `{user.chat_id}`\n**UserName:** @{user.username}\n**Date: **__{user.date}__\n**Reason:** __{user.reason}__\n\n"
+        msg += f"• 👤 {_format.mentionuser(user.first_name , user.chat_id)}\n**ID Pengguna :** `{user.chat_id}`\n**Username :** @{user.username}\n**Tanggal : **__{user.date}__\n**Reason:** __{user.reason}__\n\n"
     await edit_or_reply(event, msg)
 
 
@@ -223,8 +223,8 @@ async def ban_starters(event):
     pattern=f"bot_antif (on|off)$",
     command=("bot_antif", plugin_category),
     info={
-        "header": "Untuk mengaktifkan atau menonaktifkan bot antiflood.",
-        "description": "jika diaktifkan maka setelah 10 pesan atau 10 pengeditan pesan yang sama dalam waktu yang lebih singkat maka bot Anda akan menguncinya secara otomatis.",
+        "header": "Untuk mengaktifkan atau menonaktifkan bot antiflood",
+        "description": "jika diaktifkan maka setelah 10 pesan atau 10 pengeditan pesan yang sama dalam waktu yang lebih singkat maka bot Anda akan menguncinya secara otomatis",
         "usage": [
             "{tr}bot_antif on",
             "{tr}bot_antif off",
@@ -232,15 +232,15 @@ async def ban_starters(event):
     },
 )
 async def ban_antiflood(event):
-    "To enable or disable bot antiflood."
+    "Untuk mengaktifkan atau menonaktifkan bot antiflood"
     input_str = event.pattern_match.group(1)
     if input_str == "on":
         if gvarstatus("bot_antif") is not None:
-            return await edit_delete(event, "`Bot Antiflood sudah diaktifkan.`")
+            return await edit_delete(event, "`Bot Antiflood sudah diaktifkan`")
         addgvar("bot_antif", True)
         await edit_delete(event, "`Bot Antiflood Diaktifkan`")
     elif input_str == "off":
         if gvarstatus("bot_antif") is None:
-            return await edit_delete(event, "`Bot Antiflood sudah dinonaktifkan.`")
+            return await edit_delete(event, "`Bot Antiflood sudah dinonaktifkan`")
         delgvar("bot_antif")
-        await edit_delete(event, "`Bot Antiflood Diaktifkan.`")
+        await edit_delete(event, "`Bot Antiflood Diaktifkan`")
