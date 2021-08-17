@@ -63,14 +63,14 @@ async def ban_user_from_bot(user, reason, reply_to=None):
     except Exception as e:
         LOGS.error(str(e))
     banned_msg = (
-        f"**You have been Banned Forever from using this bot.\nReason** : {reason}"
+        f"**Anda telah Diblokir Selamanya menggunakan bot ini\nReason** : {reason}"
     )
     await drgub.tgbot.send_message(user.id, banned_msg)
-    info = f"**#Banned_Bot_PM_User**\
-            \n\n👤 {_format.mentionuser(get_display_name(user) , user.id)}\
-            \n**First Name:** {user.first_name}\
-            \n**User ID:** `{user.id}`\
-            \n**Reason:** `{reason}`"
+    info = f"**#Blokir_Bot_PM_Pengguna**\
+            \n\n• 👤 {_format.mentionuser(get_display_name(user) , user.id)}\
+            \n**Nama Depan :** {user.first_name}\
+            \n**ID Pengguna :** `{user.id}`\
+            \n**Alasan :** `{reason}`"
     if BOTLOG:
         await drgub.send_message(BOTLOG_CHATID, info)
     return info
@@ -81,14 +81,14 @@ async def unban_user_from_bot(user, reason, reply_to=None):
         rem_user_from_bl(user.id)
     except Exception as e:
         LOGS.error(str(e))
-    banned_msg = f"**You have been Unbanned from this bot. From now on you can send messages here to contact my master.**"
+    banned_msg = f"**Anda telah dibatalkan pemblokirannya dari bot ini, Mulai sekarang Anda dapat mengirim pesan di sini untuk menghubungi master**"
     if reason is not None:
-        banned_msg += f"\n**Reason:** __{reason}__"
+        banned_msg += f"\n**Alasan :** __{reason}__"
     await drgub.tgbot.send_message(user.id, banned_msg)
-    info = f"**#Unbanned_Bot_PM_User**\
-            \n\n👤 {_format.mentionuser(get_display_name(user) , user.id)}\
-            \n**First Name:** {user.first_name}\
-            \n**User ID:** `{user.id}`"
+    info = f"**#Batal_Blokir_Bot_PM_Pengguna**\
+            \n\n• 👤 {_format.mentionuser(get_display_name(user) , user.id)}\
+            \n**Nama Depan :** {user.first_name}\
+            \n**ID Pengguna :** `{user.id}`"
     if BOTLOG:
         await drgub.send_message(BOTLOG_CHATID, info)
     return info
