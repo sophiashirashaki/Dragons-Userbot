@@ -53,7 +53,7 @@ def ibuild_keyboard(buttons):
 
 
 def main_menu():
-    text = f"Repository | Userbot\
+    text = f"Dragons | Userbot\
         \n\nTelegram Userbot Dengan Telethon\
         \n\n**Bahasa :** Python\
         \n**Branch :** __Dragons-Userbot__\
