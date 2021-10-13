@@ -30,7 +30,7 @@ from .logger import logging
 LOGS = logging.getLogger(__name__)
 
 BTN_URL_REGEX = re.compile(r"(\[([^\[]+?)\]\<buttonurl:(?:/{0,2})(.+?)(:same)?\>)")
-DRGLOGO = "https://telegra.ph/file/8e51f2c57e5e27d09f907.jpg"
+DRGLOGO = "https://telegra.ph/file/6b64dcce161d8f3493f41.jpg"
 tr = Config.COMMAND_HAND_LER
 
 
@@ -101,7 +101,7 @@ def main_menu():
                 data=f"extra_menu",
             ),
             Button.inline(
-                f"🔒 Tutup Menu",
+                f"• Close •",
                 data=f"close",
             ),
         ),
