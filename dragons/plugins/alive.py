@@ -44,7 +44,7 @@ async def amireallyalive(event):
     ms = (end - start).microseconds / 1000
     _, check_sgnirts = check_data_base_heal_th()
     EMOJI = gvarstatus("ALIVE_EMOJI") or "✥"
-    ALIVE_TEXT = gvarstatus("ALIVE_TEXT") or "**✮ DRAGONS-USERBOT ✮**"
+    ALIVE_TEXT = gvarstatus("ALIVE_TEXT") or "**✮ Rikka-Userbot ✮**"
     DRG_IMG = gvarstatus("ALIVE_PIC")
     drg_caption = gvarstatus("ALIVE_TEMPLATE") or temp
     caption = drg_caption.format(
@@ -83,10 +83,10 @@ temp = """=============================
 =============================
 **{EMOJI} Database :** `{dbhealth}`
 **{EMOJI} Telethon Version :** `{telever}`
-**{EMOJI} Dragons-userbot Version :** `{drgver}`
+**{EMOJI} Rikka-Userbot Version :** `{drgver}`
 **{EMOJI} Python Version :** `{pyver}`
 **{EMOJI} Uptime :** `{uptime}`
-**{EMOJI} Master :** {mention}
+**{EMOJI} Creator :** {mention}
 ============================="""
 
 
@@ -108,9 +108,9 @@ async def amireallyalive(event):
     ALIVE_TEXT = gvarstatus("ALIVE_TEXT") or "Dragons-Userbot Aktif"
     drg_caption = f"**{ALIVE_TEXT}**\n\n"
     drg_caption += f"**{EMOJI} Telethon version :** `{version.__version__}\n`"
-    drg_caption += f"**{EMOJI} Dragons-userbot Version :** `{drgversion}`\n"
+    drg_caption += f"**{EMOJI} Rikka-Userbot Version :** `{drgversion}`\n"
     drg_caption += f"**{EMOJI} Python Version :** `{python_version()}\n`"
-    drg_caption += f"**{EMOJI} Master :** {mention}\n"
+    drg_caption += f"**{EMOJI} Creator :** {mention}\n"
     results = await event.client.inline_query(Config.TG_BOT_USERNAME, drg_caption)
     await results[0].click(event.chat_id, reply_to=reply_to_id, hide_via=True)
     await event.delete()
